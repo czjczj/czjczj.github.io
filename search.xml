@@ -24,8 +24,15 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>博客名字</title>
+    <title>Hello World</title>
     <url>/2021/03/10/%E5%8D%9A%E5%AE%A2%E5%90%8D%E5%AD%97/</url>
     <content><![CDATA[]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+        <tag>剑指Offer</tag>
+      </tags>
   </entry>
 </search>
