@@ -1,5 +1,3 @@
+# allow google
 User-agent: *
-Disallow: /
-
-User-agent: Googlebot
 Allow: /
