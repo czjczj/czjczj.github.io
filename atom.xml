@@ -3,11 +3,11 @@
   <title>一棵大白菜</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://zjcheng.site/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://zjcheng.site/"/>
   <updated>2021-03-11T13:00:37.286Z</updated>
-  <id>http://example.com/</id>
+  <id>https://zjcheng.site/</id>
   
   <author>
     <name>zj_cheng</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>热爱生命</title>
-    <link href="http://example.com/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/"/>
-    <id>http://example.com/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</id>
+    <link href="https://zjcheng.site/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/"/>
+    <id>https://zjcheng.site/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</id>
     <published>2021-03-11T12:15:42.000Z</published>
     <updated>2021-03-11T13:00:37.286Z</updated>
     
@@ -37,10 +37,10 @@
     
     
     
-    <category term="随笔" scheme="http://example.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    <category term="随笔" scheme="https://zjcheng.site/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="诗歌" scheme="http://example.com/tags/%E8%AF%97%E6%AD%8C/"/>
+    <category term="诗歌" scheme="https://zjcheng.site/tags/%E8%AF%97%E6%AD%8C/"/>
     
   </entry>
   
