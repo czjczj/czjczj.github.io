@@ -45,9 +45,9 @@
     <url>/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h3 id="Stack- 栈，-FILO"><a href="#Stack- 栈，-FILO" class="headerlink" title="Stack (栈， FILO)"></a>Stack (栈， FILO)</h3><hr>
 <ul>
-<li>方法  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk &#x3D; new Stack&lt;&gt;();</span><br><span class="line">(1) 栈顶添加元素: stk.push()</span><br><span class="line">(2) 取出栈顶元素(不删除)： stk.peek()</span><br><span class="line">(3) 取出栈顶元素(并删除)： stk.poll()</span><br></pre></td></tr></table></figure>
-<span id="more"></span></li>
+<li>方法  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk &#x3D; new Stack&lt;&gt;();</span><br><span class="line">(1) 栈顶添加元素: stk.push()</span><br><span class="line">(2) 取出栈顶元素(不删除)： stk.peek()</span><br><span class="line">(3) 取出栈顶元素(并删除)： stk.poll()</span><br></pre></td></tr></table></figure></li>
 </ul>
+<span id="more"></span>
 <h3 id="List- 有序列表的集合"><a href="#List- 有序列表的集合" class="headerlink" title="List (有序列表的集合)"></a>List (有序列表的集合)</h3><hr>
 <ul>
 <li>子类 ArrayList, LinkedList</li>
