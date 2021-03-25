@@ -265,7 +265,8 @@
     <content><![CDATA[<h1 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h1><h4 id="1- 马尔可夫性"><a href="#1- 马尔可夫性" class="headerlink" title="1. 马尔可夫性"></a>1. 马尔可夫性 </h4><p> 如果某一时刻 $t \geq 1$ 的随机变量 $x_t$ 与其一时刻随机变量 $x_{t-1}$ 之间有条件分布 $P({x_t}|{x_{t-1}})$, 如果 $x_t$ 与 $t-1$ 时刻之前的状态都没有关系, 仅与 $x_{t-1}$ 状态有关, 这一性质成为马尔科夫性质。<br>$$P(X_t|X_1, X_2,…,X_t-1) = P(X_t|X_{t-1})$$</p>
 <h4 id="2- 马尔科夫过程 -or- 马尔科夫链"><a href="#2- 马尔科夫过程 -or- 马尔科夫链" class="headerlink" title="2. 马尔科夫过程 or 马尔科夫链"></a>2. 马尔科夫过程 or 马尔科夫链 </h4><p> 具有马尔科夫性质的序列被成为马尔科夫链条。<br>$$X = (X_1, X_2, …, X_t)$$</p>
 <h4 id="3- 马尔科夫链中状态的计算"><a href="#3- 马尔科夫链中状态的计算" class="headerlink" title="3. 马尔科夫链中状态的计算"></a>3. 马尔科夫链中状态的计算 </h4><p> 马尔科夫过程中的 <strong> 状态 $t$</strong> 的状态分布概率的计算，它可以由前一时刻 $t-1$ 的状态分布和状态转移矩阵算出来。<br>$$\pi(t) = P\pi(t-1) = P(P\pi(t-2)) = P^2\pi(t-2)$$<br>即 $$\pi(t) = P^t\pi(0)$$</p>
-<p>&lt;–! more –&gt;</p>
+<span id="more"></span>
+
 <h4 id="4- 隐马尔科夫模型"><a href="#4- 隐马尔科夫模型" class="headerlink" title="4. 隐马尔科夫模型"></a>4. 隐马尔科夫模型</h4><h5 id="4-1- 假设"><a href="#4-1- 假设" class="headerlink" title="4.1 假设"></a>4.1 假设</h5><ul>
 <li>观测独立假设: <strong>观测 </strong> 只依赖于该时刻的 <strong> 马尔科夫链的状态</strong>, 与其他观测无关。</li>
 <li>马尔科夫性质: 当前状态只与前一状态有关。</li>
