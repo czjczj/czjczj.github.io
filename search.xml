@@ -309,4 +309,69 @@
         <tag>诗歌</tag>
       </tags>
   </entry>
+  <entry>
+    <title>CRF</title>
+    <url>/2021/03/25/CRF/</url>
+    <content><![CDATA[<h4 id="马尔科夫随机场"><a href="# 马尔科夫随机场" class="headerlink" title="马尔科夫随机场"></a>马尔科夫随机场</h4><ul>
+<li><p>场: 在空间的某个区域内, 如果除了个别点以外, 其他的该区域内的每个点 p 都有一个确定的量 $f(p)$, 那么 <strong> 该区域 </strong> 称为 $f(p)$ 的场。</p>
+</li>
+<li><p>随机过程: 设 $T$ 是一无限实数集, 把依赖于 $t \in T$ 的一族 (无限多个) 随机变量称为随机过程。即为</p>
+<script type="math/tex; mode=display">{X(t), t \in T}</script></li>
+<li><p>随机场: 如果 $T$ 是 $n$ 维度空间的一个子集, 即 $t$ 是一个 $n$ 维向量, 此时随机过程称为随机场。</p>
+</li>
+</ul>
+<h4 id="条件随机场 CRF-conditional-random-field"><a href="# 条件随机场 CRF-conditional-random-field" class="headerlink" title="条件随机场 CRF (conditional random field)"></a>条件随机场 CRF (conditional random field)</h4><p>定义: 设 $X=(x_1, x_2, …, x_n)$ 和 $Y=(y_1, y_2, …, y_n)$ 均为线性表示的随机变量序列。若在 <strong> 给定 </strong> 随机变量序列<strong>x 的条件下</strong>。 随机变量序列 $Y$ 的条件概率分布 $P(Y|X)$ 构成条件随机场, 并满足马尔科夫性:</p>
+<script type="math/tex; mode=display">P(Y_i|X, Y1,...,Y_{i-1},Y_{i+1},...,Y_n) = P(Y_i|X,Y_{i-1},Y_{i+1})</script><p>此时称 $P(Y|X)$ 为线性条件随机场。</p>
+<h4 id="朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格"><a href="# 朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格" class="headerlink" title="朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格"></a>朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格</h4><p><img src="https://pic4.zhimg.com/v2-104861c06cb27665b8d4287d7ab55f9b_r.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>原理</th>
+<th>特点</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>朴素贝叶斯</td>
+<td>贝叶斯公式</td>
+<td>条件概率</td>
+<td>条件推理</td>
+<td>训练复杂</td>
+</tr>
+<tr>
+<td>HMM</td>
+<td>马尔科夫性</td>
+<td>依赖前一个状态</td>
+<td>训练快</td>
+<td>局部最优</td>
+</tr>
+<tr>
+<td>逻辑回归</td>
+<td>逻辑函数</td>
+<td>取值[0,1]</td>
+<td>模拟概率</td>
+<td>准确率不高</td>
+</tr>
+<tr>
+<td>Hammersley-Clifford 定理</td>
+<td>最大团乘积</td>
+<td>特征灵活, 全局最优</td>
+<td>设置特征模板</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="CRF 的发展简史"><a href="#CRF 的发展简史" class="headerlink" title="CRF 的发展简史"></a>CRF 的发展简史</h4><p>CRF 一直时标注问题的基本模型。<br>| 历史 | 模型 |<br>|—-| —-|<br>| 机器学习阶段 | CRF|<br>| 深度学阶段 | BiLSTM-CRF, BILSTM-CNN-CRF |<br>|Attention 阶段 | Transformer-CRF, BERT-BiLSTM-CRF| </p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>算法 概率图</tag>
+      </tags>
+  </entry>
 </search>
