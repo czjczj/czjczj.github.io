@@ -64,7 +64,7 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>算法, 概率图</tag>
+        <tag>算法 概率图</tag>
       </tags>
   </entry>
   <entry>
@@ -312,7 +312,7 @@
   <entry>
     <title>CRF</title>
     <url>/2021/03/25/CRF/</url>
-    <content><![CDATA[<h4 id="马尔科夫随机场"><a href="# 马尔科夫随机场" class="headerlink" title="马尔科夫随机场"></a>马尔科夫随机场</h4><ul>
+    <content><![CDATA[<h4 id="1- 马尔科夫随机场"><a href="#1- 马尔科夫随机场" class="headerlink" title="1. 马尔科夫随机场"></a>1. 马尔科夫随机场</h4><ul>
 <li><p>场: 在空间的某个区域内, 如果除了个别点以外, 其他的该区域内的每个点 p 都有一个确定的量 $f(p)$, 那么 <strong> 该区域 </strong> 称为 $f(p)$ 的场。</p>
 </li>
 <li><p>随机过程: 设 $T$ 是一无限实数集, 把依赖于 $t \in T$ 的一族 (无限多个) 随机变量称为随机过程。即为</p>
@@ -320,9 +320,17 @@
 <li><p>随机场: 如果 $T$ 是 $n$ 维度空间的一个子集, 即 $t$ 是一个 $n$ 维向量, 此时随机过程称为随机场。</p>
 </li>
 </ul>
-<h4 id="条件随机场 CRF-conditional-random-field"><a href="# 条件随机场 CRF-conditional-random-field" class="headerlink" title="条件随机场 CRF (conditional random field)"></a>条件随机场 CRF (conditional random field)</h4><p>定义: 设 $X=(x_1, x_2, …, x_n)$ 和 $Y=(y_1, y_2, …, y_n)$ 均为线性表示的随机变量序列。若在 <strong> 给定 </strong> 随机变量序列<strong>x 的条件下</strong>。 随机变量序列 $Y$ 的条件概率分布 $P(Y|X)$ 构成条件随机场, 并满足马尔科夫性:</p>
+<h4 id="2- 条件随机场 CRF-conditional-random-field"><a href="#2- 条件随机场 CRF-conditional-random-field" class="headerlink" title="2. 条件随机场 CRF (conditional random field)"></a>2. 条件随机场 CRF (conditional random field)</h4><p>定义: 设 $X=(x_1, x_2, …, x_n)$ 和 $Y=(y_1, y_2, …, y_n)$ 均为线性表示的随机变量序列。若在 <strong> 给定 </strong> 随机变量序列<strong>x 的条件下</strong>。 随机变量序列 $Y$ 的条件概率分布 $P(Y|X)$ 构成条件随机场, 并满足马尔科夫性:</p>
 <script type="math/tex; mode=display">P(Y_i|X, Y1,...,Y_{i-1},Y_{i+1},...,Y_n) = P(Y_i|X,Y_{i-1},Y_{i+1})</script><p>此时称 $P(Y|X)$ 为线性条件随机场。<br><span id="more"></span></p>
-<h4 id="朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格"><a href="# 朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格" class="headerlink" title="朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格"></a>朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格</h4><p><img src="https://pic4.zhimg.com/v2-104861c06cb27665b8d4287d7ab55f9b_r.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<h4 id="3- 线性链条件随机场公式"><a href="#3- 线性链条件随机场公式" class="headerlink" title="3. 线性链条件随机场公式"></a>3. 线性链条件随机场公式</h4><p><img src="https://pic1.zhimg.com/80/v2-ee91ebeecd409eb4a33af209fb8b0f18_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>特征函数定义:</p>
+<p><img src="https://pic1.zhimg.com/80/v2-799f58be49406ee7478ed52d94a3f188_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>为了简单起见，将转移特征和状态特征及其权值用统一符号表示。条件随机场简化公式如下:</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e0f24d7d3c60c3fb0cfba7f10e3f33b3_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<h4 id="4- 举例说明"><a href="#4- 举例说明" class="headerlink" title="4. 举例说明"></a>4. 举例说明</h4><p><img src="https://pic3.zhimg.com/80/v2-98c85098271f347be65745d6d5b4e8de_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-980fd0c5d7c701e69aa3435f51901cb9_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>则标注序列为 {B、I、I} 的联合概率分布如下：<br><img src="https://pic4.zhimg.com/80/v2-15120e3c0ae1e8c49defca66ac945143_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<h4 id="5- 朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格"><a href="#5- 朴素贝叶斯 -HMM- 逻辑回归 -CRF 对比表格" class="headerlink" title="5. 朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格"></a>5. 朴素贝叶斯, HMM, 逻辑回归, CRF 对比表格</h4><p><img src="https://pic4.zhimg.com/v2-104861c06cb27665b8d4287d7ab55f9b_r.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
 <div class="table-container">
 <table>
 <thead>
@@ -357,6 +365,7 @@
 <td>准确率不高</td>
 </tr>
 <tr>
+<td>CRF</td>
 <td>Hammersley-Clifford 定理</td>
 <td>最大团乘积</td>
 <td>特征灵活, 全局最优</td>
@@ -365,7 +374,43 @@
 </tbody>
 </table>
 </div>
-<h4 id="CRF 的发展简史"><a href="#CRF 的发展简史" class="headerlink" title="CRF 的发展简史"></a>CRF 的发展简史</h4><p>CRF 一直时标注问题的基本模型。<br>| 历史 | 模型 |<br>|—-| —-|<br>| 机器学习阶段 | CRF|<br>| 深度学阶段 | BiLSTM-CRF, BILSTM-CNN-CRF |<br>|Attention 阶段 | Transformer-CRF, BERT-BiLSTM-CRF| </p>
+<h4 id="6-CRF 的发展简史"><a href="#6-CRF 的发展简史" class="headerlink" title="6. CRF 的发展简史"></a>6. CRF 的发展简史</h4><p>CRF 一直时标注问题的基本模型。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>历史</th>
+<th>模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器学习阶段</td>
+<td>CRF</td>
+</tr>
+<tr>
+<td>深度学阶段</td>
+<td>BiLSTM-CRF, BILSTM-CNN-CRF</td>
+</tr>
+<tr>
+<td>Attention 阶段</td>
+<td>Transformer-CRF, BERT-BiLSTM-CRF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="7-CRF 的应用"><a href="#7-CRF 的应用" class="headerlink" title="7. CRF 的应用"></a>7. CRF 的应用 </h4><h5 id="7-1- 中文分词"><a href="#7-1- 中文分词" class="headerlink" title="7.1. 中文分词"></a>7.1. 中文分词</h5><p> 基于 CRF 由字构词方法的基本思想，基本原理如下：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-31b9b12996bef5bfc857eabcc276e899_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>CRF 中文分词的图结构如下：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-8c7825e6a2a700faf96c7ed2aa1c7ed9_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<h5 id="7-2- 命名实体识别"><a href="#7-2- 命名实体识别" class="headerlink" title="7.2. 命名实体识别"></a>7.2. 命名实体识别 </h5><p> 基于 CRF 的命名实体识别过程如下：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-e6b99a5894e1d65a0b8802ed718b861c_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>CRF 命名实体识别的图结构如下：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-cdacd9ff36747052097e5516360a0155_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<h5 id="7-3- 词性标注"><a href="#7-3- 词性标注" class="headerlink" title="7.3. 词性标注"></a>7.3. 词性标注 </h5><p> 基于 CRF 词性标注方法的基本思想，基本原理如下：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-d6156399374fb6f9f813301559cb3f32_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
+<p>CRF 中文词性标注的图结构如下：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9d7163ea8fbb8484d1521936fe2ef139_720w.jpg" style="width:80%;height:80%;display:inline-block;text-align:center"></p>
 ]]></content>
       <categories>
         <category>机器学习</category>
