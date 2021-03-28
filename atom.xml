@@ -6,7 +6,7 @@
   <link href="https://zjcheng.site/atom.xml" rel="self"/>
   
   <link href="https://zjcheng.site/"/>
-  <updated>2021-03-25T07:27:17.903Z</updated>
+  <updated>2021-03-28T07:26:59.239Z</updated>
   <id>https://zjcheng.site/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>百面机器学习</title>
+    <link href="https://zjcheng.site/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://zjcheng.site/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-03-28T06:58:06.000Z</published>
+    <updated>2021-03-28T07:26:59.239Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="为什么需要对于数值类型特征进行特征归一化"><a href="# 为什么需要对于数值类型特征进行特征归一化" class="headerlink" title="为什么需要对于数值类型特征进行特征归一化?"></a>为什么需要对于数值类型特征进行特征归一化?</h4><p>为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:</p><ul><li>线性函数归一化 (Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1] 范围内。<script type="math/tex; mode=display">X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}</script></li><li>零均值归一化：会将原始特征映射到均值为 0，方差为 1 的分布上。设原始特征的均值和方差分别为 $\mu, \delta$，归一化公式。<script type="math/tex; mode=display">z = \frac{x - \mu}{\delta}</script><span id="more"></span>Python 代码实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 线性函数归一化, 零均值归一化</span><br><span class="line">from sklearn.preprocessing import MinMaxScaler, StandardScaler</span><br><span class="line">scaler &#x3D; MinMaxScaler()</span><br><span class="line">x &#x3D; scaler.fit(x)</span><br><span class="line">x &#x3D; scaler.transform(x)</span><br></pre></td></tr></table></figure>好处：归一化后能够加快模型的梯度下降收敛速度（线性回归，逻辑回归，SVM, NN），树模型不适用。<br><img src="../imgs/ 百面机器学习 /1-1.png" style="width:90%;height:80%;display:inline-block;text-align:center"></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;为什么需要对于数值类型特征进行特征归一化&quot;&gt;&lt;a href=&quot;#为什么需要对于数值类型特征进行特征归一化&quot; class=&quot;headerlink&quot; title=&quot;为什么需要对于数值类型特征进行特征归一化?&quot;&gt;&lt;/a&gt;为什么需要对于数值类型特征进行特征归一化?&lt;/h4&gt;&lt;p&gt;为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线性函数归一化(Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1]范围内。&lt;script type=&quot;math/tex; mode=display&quot;&gt;X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}&lt;/script&gt;&lt;/li&gt;
+&lt;li&gt;零均值归一化：会将原始特征映射到均值为0，方差为1 的分布上。设原始特征的均值和方差分别为$\mu, \delta$，归一化公式。&lt;script type=&quot;math/tex; mode=display&quot;&gt;z = \frac{x - \mu}{\delta}&lt;/script&gt;</summary>
+    
+    
+    
+    <category term="面试" scheme="https://zjcheng.site/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="面试 机器学习" scheme="https://zjcheng.site/tags/%E9%9D%A2%E8%AF%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>CRF</title>
