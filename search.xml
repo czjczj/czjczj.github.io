@@ -422,8 +422,8 @@
       </tags>
   </entry>
   <entry>
-    <title>百面机器学习</title>
-    <url>/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <title>百面机器学习 (一)</title>
+    <url>/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%B8%80)/</url>
     <content><![CDATA[<h4 id="1- 为什么需要对于数值类型特征进行特征归一化"><a href="#1- 为什么需要对于数值类型特征进行特征归一化" class="headerlink" title="1. 为什么需要对于数值类型特征进行特征归一化?"></a>1. 为什么需要对于数值类型特征进行特征归一化?</h4><p>为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:</p>
 <ul>
 <li><p>线性函数归一化 (Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1] 范围内。</p>
@@ -529,7 +529,7 @@
 <li><p>贝叶斯优化算法：对目标函数进行学习，找到目标函数向全局最优值提升的参数。缺点是容易陷入局部最优值。</p>
 </li>
 </ul>
-<h4 id="集中降低过拟合和欠拟合风险的方法？"><a href="# 集中降低过拟合和欠拟合风险的方法？" class="headerlink" title="集中降低过拟合和欠拟合风险的方法？"></a>集中降低过拟合和欠拟合风险的方法？</h4><ul>
+<h4 id="8- 集中降低过拟合和欠拟合风险的方法？"><a href="#8- 集中降低过拟合和欠拟合风险的方法？" class="headerlink" title="8. 集中降低过拟合和欠拟合风险的方法？"></a>8. 集中降低过拟合和欠拟合风险的方法？</h4><ul>
 <li><p>降低 “过拟合” 风险的方法。</p>
 <ul>
 <li><p>获得更多的训练数据。</p>
@@ -552,6 +552,161 @@
 </li>
 </ul>
 </li>
+</ul>
+<h4 id="9-SVM"><a href="#9-SVM" class="headerlink" title="9. SVM"></a>9. SVM</h4><ul>
+<li><p>svm 中两类分类点在超平面上的投影是线性不可分的</p>
+</li>
+<li><p>$R^d$ 空间中的某个点 $p \in R^d$ 到超平面 $w^T \cdot x + b = 0$ 的距离为 $\frac{|w^T \cdot p + b|}{||w||}$ (点 p 到超平面的距离等于 p 与超平面上某点想超平面的法向量的投影)</p>
+</li>
+<li><p>间隔 $\gamma$ 的定义: 间隔表示距离超平面最近的样本到划分超平面距离的两倍。<br>$\gamma := 2min_i \frac{|w^T \cdot x_i + b|}{||w||}$</p>
+</li>
+<li><p>定理 3：线性支持向量机的目标, 找到一组合适的 $w, b$，使得</p>
+<script type="math/tex; mode=display">\max\limits_{w,b}\min\limits_{i}\frac{2|{w^T\cdot x_i + b|}}{||w||}</script><script type="math/tex; mode=display">y_i(w^T\cdot x_i + b) > 0, i = 1,...,m</script></li>
+<li><p>定理 4：若 $(w^<em>, b^</em>)$ 是线性支持向量的一个解，那么对于任意的 $r&gt;0$ 仍然是该优化问题的解。因此为了简化优化问题，我们约束 $(w, b)$ 使得 $\min\limits_i|w^T\cdot x_i + b| = 1$</p>
+</li>
+<li><p>定理 5 (线性支持向量机基本型)：根据定理 3, 4 推导</p>
+<script type="math/tex; mode=display">\max\limits_{w, b}\frac{2}{||w||}</script><script type="math/tex; mode=display">y_i (w_T\cdot x_i + b) > 0, i=1,...,m</script><script type="math/tex; mode=display">\min\limits_i |w^T \cdot x_i + b| = 1</script><p>转化为：其中在支持向量上的点取到等于符号</p>
+<script type="math/tex; mode=display">\min\limits_{w, b}\frac{1}{2}w^T\cdot w</script><script type="math/tex; mode=display">y_i (w_T\cdot x_i + b) \geq 1, i=1,..., m</script></li>
+<li><p>定义 6 拉格朗日函数，对于优化问题</p>
+<script type="math/tex; mode=display">\min\limits_u f(u) \\
+  g_i(u) \leq 0, i=1,..., m \\
+  h_j(u) = 0, j=1,..., n</script><p>拉格朗日函数形式为:</p>
+<script type="math/tex; mode=display">
+  L(u, \alpha, \beta) = f(u) + \sum_i\alpha_ig_i(u) + \sum_j\beta_j(u) \\
+  \alpha_i \geq 0</script></li>
+<li><p>推理 7. 结合定理 5 和 6，优化公式：</p>
+<script type="math/tex; mode=display">\min\limits_{u}\max\limits_{\alpha, \beta} L(u, \alpha, \beta) \\
+  \alpha_i \geq 0, i = 1,..., m.</script></li>
+<li><p>KKT 条件（推理 7）描述的优化为题在最优值处必须满足如下条件：</p>
+<ul>
+<li><p>主问题可行: $g_i(u) \leq 0, h_j(u) = 0$。</p>
+</li>
+<li><p>对偶问题可行: $\alpha_i \geq 0$；</p>
+</li>
+<li><p>互补松弛条件: $a_ig_i(u) = 0$;</p>
+</li>
+</ul>
+</li>
+<li><p>对偶问题(推理 7 优化的对偶问题)， 且对偶问题是主问题（推理 7）的下界。</p>
+<script type="math/tex; mode=display">\max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta) \\
+  \alpha_i \geq 0, i = 1, ..., m \\
+  \max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta) \leq \min_{u}\max_{\alpha, \beta} L(u, \alpha, \beta)</script></li>
+<li><p>线性支持向量机的拉格朗日形式：</p>
+<script type="math/tex; mode=display">L(w, b, a) = \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)] \\
+a_i \geq 0, i=1, ..., m</script><p>其对偶问题为:</p>
+<script type="math/tex; mode=display">\max_a\min_{w, b} \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)] \\
+a_i \geq 0, i=1, ..., m</script></li>
+<li><p>线性支持向量机的对偶问题等价于找到一组合适的参数 a, 使得。</p>
+<script type="math/tex; mode=display">
+  \min_a \frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_jx_i^Tx_j - \sum_{i-1}^ma_i \\
+  \sum_{i=1}^ma_iy_i = 0 \\
+  a_i \geq 0, i=1, ..., m</script><p>根据内层对 $(w, b)$ 求导，然后令偏导等于 0， 得到（w, b）的最优值。</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial w}=0 \to w = \sum_{i=1}^ma_iy_ix_i \\
+  \frac{\partial L}{\partial b}=0 \to     \sum_{i=1}^ma_iy_i = 0</script></li>
+<li><p>线性支持向量机的 KKT 条件：</p>
+<ul>
+<li><p>主问题可行：  $1 - y_i(w^Tx_i + b) \leq 0$</p>
+</li>
+<li><p>对偶问题可行： $a_i \geq 0$</p>
+</li>
+<li><p>互补松弛: $a_i (1 - y_i(w^Tx_i + b)) = 0$</p>
+</li>
+</ul>
+</li>
+<li><p>引理 1: 线性支持向量机中，支持向量是距离划分平面最近的样本，落在最大间隔边界上。<br>由 KKT 条件：</p>
+<ul>
+<li><p>$a_i &gt; 0$ 时候，$1 - y_i(w^Tx_i + b) = 0 \to y_i(w^Tx_i + b) = 1$</p>
+</li>
+<li><p>$a_i = 0$ 时候, $1 - y_i(w^Tx_i + b) &lt; 0 \to y_i(w^Tx_i + b) &gt; 1$</p>
+</li>
+</ul>
+</li>
+<li><p>引理 2: 支持向量机的参数 $(w, b)$ 仅由支持向量决定，与其他样本无关（只有 $a_i &gt; 0$ 样本有效）。</p>
+<script type="math/tex; mode=display">w = \sum_{i=1}^m a_iy_ix_i</script></li>
+<li><p>常见核函数：</p>
+<ul>
+<li><ol>
+<li>当特征维度 d 超过样本数，使用线性核。</li>
+</ol>
+</li>
+<li><ol>
+<li>当特征维度 d 较小，样本数 m 中等时，使用 RBF 核。</li>
+</ol>
+</li>
+<li><ol>
+<li>当特征维度 d 较小，样本数 m 较大时，svm 性能不如神经网络。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>experssion</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性核函数</td>
+<td>$k(x_i, x_j) = x_i * x_j$</td>
+<td>有高效实现，不容易过拟合</td>
+<td>无法解决非线性可分问题</td>
+</tr>
+<tr>
+<td>多项式核函数</td>
+<td>$k(x_i, x_j) = ((x_i * x_j) + 1) ^ d$</td>
+<td>比线性核更一般，d 描述了被映射空间的复杂度</td>
+<td>参数多，d 很大时计算不稳定</td>
+</tr>
+<tr>
+<td>高斯核函数（RBF）</td>
+<td>$k(x_i, x_j) = exp(- \frac{(x_i-x_j)^2}{2{\delta}^2})$</td>
+<td>只有一个参数，没有计算不稳定问题</td>
+<td>计算慢，过拟合风险大</td>
+</tr>
+<tr>
+<td>sigmoid 核函数</td>
+<td>$k(x_i, x_j) = tanh(\eta <x_i, x_j> + \theta)$</td>
+<td>实现的是一种多层神经网络</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>软间隔: 前面的公式都是假设样本完全是线性可分的（虽然理论上总能找到一个高维映射使数据线性可分。但是实际任务中找到这样的核函数是非常难的）</p>
+</li>
+<li><p>软间隔支持向量机基本类型（离散型）：在优化间隔的同时，允许分类错误的样本出现，但是这类样本需要尽可能少。</p>
+<script type="math/tex; mode=display">\min_{w,b}\frac{1}{2}w^Tw + C\sum_{i=1}^mI(y_i \neq sign(w^T\phi(x_i) + b)) \\
+  y_i(w^T\phi(x_i) + b) \geq 1, if y_i = sign(w^T\phi(x_i) + b)</script><p>$C$ 是个可调节参数用于权衡优化间隔的超参数。</p>
+</li>
+<li><p>软间隔支持向量机基本型（连续型）：为了使优化函数问题保持为二次规划问题，引入连续值变量（松弛变量 $\xi_i$ ) 用以度量样本违背约束的程度。</p>
+<ul>
+<li><p>当 $y_i(w^T\phi(x_i) + b) \geq 1$, $\xi_i = 0$</p>
+</li>
+<li><p>否则, $\xi_i = 1 - y_i(w^T\phi(x_i) + b)$ (hinge loss)</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">\min_{w, b, \xi}\frac{1}{2}w^Tw + C \sum_{i=1}^m \xi_i \\
+  y_i(w^T\phi(x_i) + b) \geq 1 - \xi_i, i = 1, ..., m \\
+  \xi_i \geq 0, i = 1, ..., m</script></li>
+<li><p>软间隔支持向量机对偶型：其对偶问题等价于找到一组合适的 a， 使得</p>
+<script type="math/tex; mode=display">\min_a\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_j\phi(x_i)^T\phi(x_j) - \sum_{i=1}^ma_i \\
+\sum_{i=1}^ma_iy_i = 0 \\
+0 \leq a_i \leq C , i = 1, ..., m</script></li>
+<li><p>软间隔支持向量机的拉格朗日函数:</p>
+<script type="math/tex; mode=display">L(w, b, \xi, a, \beta) = \frac{1}{2}w^Tw + C\sum_{i=1}^m\xi_i + \sum_{i=1}^ma_i(1-\xi_i-y_i(w^T\phi(x_i)+b))+\sum_{i=1}^m\beta_i(-\xi_i)</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">\max_{a, \beta}\min_{w, b, \xi} L(w, b, \xi, a, \xi) \\
+  a_i \geq 0, i = 1, ..., m \\
+  \beta_i \geq 0, i = 1, ..., m</script><p>内层对 $(w, b, \xi)$ 求导并令偏导等于 0.</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial w} = 0 \to w = \sum_{i=1}^ma_iy_i\phi(x_i) \\
+  \frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^ma_iy_i = 0 \\
+  \frac{\partial L}{\partial \xi} = 0 \to a_i + \beta_i = C \\
+  \beta_i = C - a_i \geq 0 \to 0 \leq a_i \leq C</script></li>
 </ul>
 ]]></content>
       <categories>
