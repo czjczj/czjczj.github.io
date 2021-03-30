@@ -107,7 +107,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>算法 概率图</tag>
+        <tag>算法</tag>
+        <tag>概率图</tag>
       </tags>
   </entry>
   <entry>
@@ -174,7 +175,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>算法 概率图</tag>
+        <tag>算法</tag>
+        <tag>概率图</tag>
       </tags>
   </entry>
   <entry>
@@ -556,7 +558,8 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>面试 机器学习</tag>
+        <tag>面试</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
 </search>
