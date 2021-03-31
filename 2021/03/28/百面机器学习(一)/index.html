@@ -27,18 +27,18 @@
     var CONFIG = {"hostname":"zjcheng.site","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1. 为什么需要对于数值类型特征进行特征归一化?为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:  线性函数归一化(Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1]范围内。 X_{norm} &#x3D; \frac{X - X_{min}}{X_{max} - X_{min}} 零均值归一化：会将原始特征映射">
+  <meta name="description" content="为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:  线性函数归一化(Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1]范围内。 X_{norm} &#x3D; \frac{X - X_{min}}{X_{max} - X_{min}} 零均值归一化：会将原始特征映射到均值为0，方差为1 的分布上。设原始特征的均值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="百面机器学习 (一)">
 <meta property="og:url" content="https://zjcheng.site/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="一棵大白菜">
-<meta property="og:description" content="1. 为什么需要对于数值类型特征进行特征归一化?为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:  线性函数归一化(Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1]范围内。 X_{norm} &#x3D; \frac{X - X_{min}}{X_{max} - X_{min}} 零均值归一化：会将原始特征映射">
+<meta property="og:description" content="为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:  线性函数归一化(Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1]范围内。 X_{norm} &#x3D; \frac{X - X_{min}}{X_{max} - X_{min}} 零均值归一化：会将原始特征映射到均值为0，方差为1 的分布上。设原始特征的均值">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/1-1.png">
 <meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/1-2.png">
 <meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/1-3.png">
 <meta property="article:published_time" content="2021-03-28T06:58:06.000Z">
-<meta property="article:modified_time" content="2021-03-31T01:03:20.432Z">
+<meta property="article:modified_time" content="2021-03-31T01:08:39.003Z">
 <meta property="article:author" content="zj_cheng">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="机器学习">
@@ -246,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-31 09:03:20" itemprop="dateModified" datetime="2021-03-31T09:03:20+08:00">2021-03-31</time>
+                <time title="修改时间：2021-03-31 09:08:39" itemprop="dateModified" datetime="2021-03-31T09:08:39+08:00">2021-03-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="1- 为什么需要对于数值类型特征进行特征归一化"><a href="#1- 为什么需要对于数值类型特征进行特征归一化" class="headerlink" title="1. 为什么需要对于数值类型特征进行特征归一化?"></a>1. 为什么需要对于数值类型特征进行特征归一化?</h4><p>为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:</p>
+        <p>为了消除不同数据特征之间的量纲影响，我们需要对于特征进行归一化处理，是的不同指标之间具有可比性。其主要方法为以下两种:</p>
 <ul>
 <li><p>线性函数归一化 (Min-Max Scaling)：对原始特征进行线性变换，归一化到[0,1] 范围内。</p>
 <script type="math/tex; mode=display">X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}</script></li>
@@ -301,8 +301,8 @@
 <p>好处：归一化后能够加快模型的梯度下降收敛速度（线性回归，逻辑回归，SVM, NN），树模型不适用。<br><img src="/imgs/bmjqxx/1-1.png" style="width:80%;height:80%;text-align:center"></p>
 </li>
 </ul>
-<hr>
-<h4 id="2- 在对数据预处理时，如何处理类别型特征？"><a href="#2- 在对数据预处理时，如何处理类别型特征？" class="headerlink" title="2. 在对数据预处理时，如何处理类别型特征？"></a>2. 在对数据预处理时，如何处理类别型特征？</h4><ul>
+<h4 id="2- 在对数据预处理时，如何处理类别型特征？"><a href="#2- 在对数据预处理时，如何处理类别型特征？" class="headerlink" title="2. 在对数据预处理时，如何处理类别型特征？"></a>2. 在对数据预处理时，如何处理类别型特征？</h4><hr>
+<ul>
 <li><p>序号编码：类别之间具有大小关系。例如乘积的高、中、低三挡。序号编码按照大小关系对类别特征赋予一个数值 id。</p>
 </li>
 <li><p>独热编码：类别间不具有大小关系的特征。需要注意类别取值较多的情况下的问题</p>
@@ -314,8 +314,8 @@
 <li><p>二进制编码：先使用序号编码为每一个类别赋予一个类别 id, 然后使用二进制编码 hash。</p>
 </li>
 </ul>
-<hr>
-<h4 id="3- 什么是组合特征？如何处理高维组合特征？"><a href="#3- 什么是组合特征？如何处理高维组合特征？" class="headerlink" title="3. 什么是组合特征？如何处理高维组合特征？"></a>3. 什么是组合特征？如何处理高维组合特征？</h4><p>为了提高复杂关系的拟合能力，特征工程经常将 <strong> 一阶离散特征 </strong> 两两组合，构成高阶组合特征。例如广告点击预估问题中，原始数据中有语言和类型两种离散特征。</p>
+<h4 id="3- 什么是组合特征？如何处理高维组合特征？"><a href="#3- 什么是组合特征？如何处理高维组合特征？" class="headerlink" title="3. 什么是组合特征？如何处理高维组合特征？"></a>3. 什么是组合特征？如何处理高维组合特征？</h4><hr>
+<p>为了提高复杂关系的拟合能力，特征工程经常将 <strong> 一阶离散特征 </strong> 两两组合，构成高阶组合特征。例如广告点击预估问题中，原始数据中有语言和类型两种离散特征。</p>
 <script type="math/tex; mode=display">Y = sigmoid(\sum_i\sum_jW_{ij}<x_i, x_j>)</script><p>$W_{ij}$ 的维度等于 $|x_i| \cdot |x_j|$, 即为 $i$ 和 $j$ 的特征个数乘积。</p>
 <ul>
 <li><p>可能存在的问题：当 <strong> 离散型 </strong> 特征为 id 类型的特征时候，例如推荐问题中, m 个用户 id 和 n 个物品 id。那么 m 和 n 都是千亿级别的，这个乘积就非常大，参数量就会非常大。一种行之有效的方法就是将用户和物品分别映射为 $k$ 维度的低纬度向量 ($k\ll m, k\ll n$), 此时需要学习的参数规模变为 $m \times k + n \times k$。 </p>
@@ -323,8 +323,8 @@
 <li><p>其他的特征组合方式： 两两组合特征仍然存在过拟合的问题，其他特征组合方式，基于决策树的特征组合寻找方式。<br><img src="/imgs/bmjqxx/1-2.png" style="width:80%;height:80%;text-align:center"></p>
 </li>
 </ul>
-<hr>
-<h4 id="4- 文本表示模型有哪些？各自的优缺点？"><a href="#4- 文本表示模型有哪些？各自的优缺点？" class="headerlink" title="4. 文本表示模型有哪些？各自的优缺点？"></a>4. 文本表示模型有哪些？各自的优缺点？</h4><ul>
+<h4 id="4- 文本表示模型有哪些？各自的优缺点？"><a href="#4- 文本表示模型有哪些？各自的优缺点？" class="headerlink" title="4. 文本表示模型有哪些？各自的优缺点？"></a>4. 文本表示模型有哪些？各自的优缺点？</h4><hr>
+<ul>
 <li><p>词袋模型：每篇文本看做一个忽略顺序的词语集合，被表示为一个长向量。向量的每一维表示一个词语，维度对应的权重表示该词在原文章中的重要程度。TF-IDF 计算公式。</p>
 <script type="math/tex; mode=display">TF-IDF (t, d) = TF (t, d) \times IDF (t)</script><p>其中 $TF (t, d)$ 表示 $t$ 单词在文档 $d$ 中出现的频率。 $IDF (t)$ 表示逆文档频率。</p>
 <script type="math/tex; mode=display">IDF (t) = \log \frac{文章总数}{出现 t 的文章数 + 1}</script></li>
@@ -335,8 +335,8 @@
 <li><p>词嵌入和深度学习模型：词向量化模型的统称。核心思想是将每一个词映射成低纬度空间上的一个稠密向量。</p>
 </li>
 </ul>
-<hr>
-<h4 id="5-Word2Vec- 是如何工作的？它和 -LDA- 有什么区别和联系？"><a href="#5-Word2Vec- 是如何工作的？它和 -LDA- 有什么区别和联系？" class="headerlink" title="5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？"></a>5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？</h4><ul>
+<h4 id="5-Word2Vec- 是如何工作的？它和 -LDA- 有什么区别和联系？"><a href="#5-Word2Vec- 是如何工作的？它和 -LDA- 有什么区别和联系？" class="headerlink" title="5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？"></a>5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？</h4><hr>
+<ul>
 <li><p>CBOW 是根据上下文出现的词语来预测当前词的生成概率。Skip-gram 则是根据当前词预测上下文中各个词的生成概率。激活函数使用 $softmax$。<br><img src="/imgs/bmjqxx/1-3.png" style="width:80%;height:80%;text-align:center"></p>
 </li>
 <li><p>由于 CBOW 和 Skip-gram 中激活函数存在归一化的缘故，每次迭代过程非常缓慢。 产生 Hierarchical Softmax 和 Negative Sampling 两种改进方法。</p>
@@ -365,8 +365,8 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h4 id="6- 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？"><a href="#6- 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？" class="headerlink" title="6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？"></a>6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？</h4><ul>
+<h4 id="6- 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？"><a href="#6- 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？" class="headerlink" title="6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？"></a>6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？</h4><hr>
+<ul>
 <li><p>数据不足会带来过拟合问题：通过简化模型（非线性模型变为线性模型），添加参数约束项缩小假设空间（L1/L2 正则化），集成学习，Dropout(降低)参数。</p>
 </li>
 <li><p>根据先验知识，在保持特定信息前提下，扩充数据集。</p>
@@ -392,8 +392,8 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h4 id="7- 超参数有哪些调优方法？"><a href="#7- 超参数有哪些调优方法？" class="headerlink" title="7. 超参数有哪些调优方法？"></a>7. 超参数有哪些调优方法？</h4><ul>
+<h4 id="7- 超参数有哪些调优方法？"><a href="#7- 超参数有哪些调优方法？" class="headerlink" title="7. 超参数有哪些调优方法？"></a>7. 超参数有哪些调优方法？</h4><hr>
+<ul>
 <li><p>网格搜索： 它通过查找搜索范围内的所有点来确定最优值。缺点是非常需要消耗资源和时间。实际应用中网格搜索法一般先使用较为广的搜索范围和较大步长寻找全局最优值可能的位置，然后在缩小范围和步长进行精确查找。</p>
 </li>
 <li><p>随机搜索：在搜索范围随机选择样本点。理论依据，如果样本点足够多，那么随机采样很大概率可以找到全局最优解或近似解，它比网格搜索更快。</p>
@@ -401,8 +401,8 @@
 <li><p>贝叶斯优化算法：对目标函数进行学习，找到目标函数向全局最优值提升的参数。缺点是容易陷入局部最优值。</p>
 </li>
 </ul>
-<hr>
-<h4 id="8- 集中降低过拟合和欠拟合风险的方法？"><a href="#8- 集中降低过拟合和欠拟合风险的方法？" class="headerlink" title="8. 集中降低过拟合和欠拟合风险的方法？"></a>8. 集中降低过拟合和欠拟合风险的方法？</h4><ul>
+<h4 id="8- 集中降低过拟合和欠拟合风险的方法？"><a href="#8- 集中降低过拟合和欠拟合风险的方法？" class="headerlink" title="8. 集中降低过拟合和欠拟合风险的方法？"></a>8. 集中降低过拟合和欠拟合风险的方法？</h4><hr>
+<ul>
 <li><p>降低 “过拟合” 风险的方法。</p>
 <ul>
 <li><p>获得更多的训练数据。</p>
@@ -426,8 +426,8 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h4 id="9-SVM"><a href="#9-SVM" class="headerlink" title="9. SVM"></a>9. SVM</h4><ul>
+<h4 id="9-SVM"><a href="#9-SVM" class="headerlink" title="9. SVM"></a>9. SVM</h4><hr>
+<ul>
 <li><p>svm 中两类分类点在超平面上的投影是线性不可分的</p>
 </li>
 <li><p>$R^d$ 空间中的某个点 $p \in R^d$ 到超平面 $w^T \cdot x + b = 0$ 的距离为 $\frac{|w^T \cdot p + b|}{||w||}$ (点 p 到超平面的距离等于 p 与超平面上某点想超平面的法向量的投影)</p>
@@ -688,7 +688,7 @@ a_i \geq 0, i=1, ..., m</script></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AF%B9%E4%BA%8E%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%89%B9%E5%BE%81%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-text">1. 为什么需要对于数值类型特征进行特征归一化?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%20%E5%9C%A8%E5%AF%B9%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%B1%BB%E5%88%AB%E5%9E%8B%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-text">2. 在对数据预处理时，如何处理类别型特征？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%20%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%AB%98%E7%BB%B4%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-text">3. 什么是组合特征？如何处理高维组合特征？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%20%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="nav-text">4. 文本表示模型有哪些？各自的优缺点？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Word2Vec-%20%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F%E5%AE%83%E5%92%8C%20-LDA-%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB%EF%BC%9F"><span class="nav-text">5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%20%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E4%B8%AD%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%B6%B3%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E7%BC%93%E8%A7%A3%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8D%E8%B6%B3%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%20%E8%B6%85%E5%8F%82%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-text">7. 超参数有哪些调优方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%20%E9%9B%86%E4%B8%AD%E9%99%8D%E4%BD%8E%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E9%A3%8E%E9%99%A9%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-text">8. 集中降低过拟合和欠拟合风险的方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-SVM"><span class="nav-text">9. SVM</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%20%E5%9C%A8%E5%AF%B9%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%B1%BB%E5%88%AB%E5%9E%8B%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-text">2. 在对数据预处理时，如何处理类别型特征？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%20%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%AB%98%E7%BB%B4%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-text">3. 什么是组合特征？如何处理高维组合特征？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%20%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="nav-text">4. 文本表示模型有哪些？各自的优缺点？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Word2Vec-%20%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F%E5%AE%83%E5%92%8C%20-LDA-%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB%EF%BC%9F"><span class="nav-text">5. Word2Vec 是如何工作的？它和 LDA 有什么区别和联系？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%20%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E4%B8%AD%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%B6%B3%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E7%BC%93%E8%A7%A3%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8D%E8%B6%B3%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">6. 图像分类任务中，数据不足可能产生的问题？如何缓解数据量不足带来的问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%20%E8%B6%85%E5%8F%82%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-text">7. 超参数有哪些调优方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%20%E9%9B%86%E4%B8%AD%E9%99%8D%E4%BD%8E%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E9%A3%8E%E9%99%A9%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-text">8. 集中降低过拟合和欠拟合风险的方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-SVM"><span class="nav-text">9. SVM</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
