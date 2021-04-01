@@ -24,22 +24,28 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"zjcheng.site","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"zjcheng.site","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="#">
+  <meta name="description" content="1. 决策树之间的区别     ID3 C4.5 CART     依据 信息增益 信息增益率 Gini系数   任务 分类 分类 分类和回归   树类型 多叉树 多叉树 二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="百面机器学习 (二)">
 <meta property="og:url" content="https://zjcheng.site/2021/03/30/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/index.html">
 <meta property="og:site_name" content="一棵大白菜">
-<meta property="og:description" content="#">
+<meta property="og:description" content="1. 决策树之间的区别     ID3 C4.5 CART     依据 信息增益 信息增益率 Gini系数   任务 分类 分类 分类和回归   树类型 多叉树 多叉树 二叉树">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/4-1a.png">
+<meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/4-1b.png">
+<meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/4-4.png">
+<meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/4-5a.png">
+<meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/4-5b.png">
 <meta property="article:published_time" content="2021-03-30T13:24:13.000Z">
-<meta property="article:modified_time" content="2021-03-30T13:25:38.594Z">
+<meta property="article:modified_time" content="2021-03-31T12:45:05.535Z">
 <meta property="article:author" content="zj_cheng">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjcheng.site/imgs/bmjqxx/4-1a.png">
 
 <link rel="canonical" href="https://zjcheng.site/2021/03/30/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/">
 
@@ -234,10 +240,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-30 21:24:13 / 修改时间：21:25:38" itemprop="dateCreated datePublished" datetime="2021-03-30T21:24:13+08:00">2021-03-30</time>
+              <time title="创建时间：2021-03-30 21:24:13" itemprop="dateCreated datePublished" datetime="2021-03-30T21:24:13+08:00">2021-03-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-31 20:45:05" itemprop="dateModified" datetime="2021-03-31T20:45:05+08:00">2021-03-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -280,7 +292,159 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id=""><a href="#"class="headerlink"title="#"></a>#</h3><span id="more"></span>
+        <h4 id="1- 决策树之间的区别"><a href="#1- 决策树之间的区别" class="headerlink" title="1. 决策树之间的区别"></a>1. 决策树之间的区别</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ID3</th>
+<th>C4.5</th>
+<th>CART</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依据</td>
+<td>信息增益</td>
+<td>信息增益率</td>
+<td>Gini 系数</td>
+</tr>
+<tr>
+<td>任务</td>
+<td>分类</td>
+<td>分类</td>
+<td>分类和回归</td>
+</tr>
+<tr>
+<td>树类型</td>
+<td>多叉树</td>
+<td>多叉树</td>
+<td>二叉树</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span id="more"></span>
+<h4 id="2- 如何对决策树进行剪枝"><a href="#2- 如何对决策树进行剪枝" class="headerlink" title="2. 如何对决策树进行剪枝"></a>2. 如何对决策树进行剪枝 </h4><p> 决策树剪枝包含 2 种：</p>
+<ul>
+<li><p>预剪枝: 在生成决策树的过程中提前停止树的增长，核心思想是在树进行扩展之前，计算当前划分能够带来模型泛化能力的提升，如果不能则停止生长。</p>
+<ul>
+<li>当树达到一定深度时候，停止生长。</li>
+<li>当前节点的样本数量小于某个阈值的时候，停止生长。</li>
+<li>计算每次分裂对于测试集的准确度的提升，当小于某个阈值时，停止生长。</li>
+</ul>
+</li>
+<li><p>后剪枝：在已经生成的过拟合决策树上进行剪枝。核心思想在树完全生长后，从底层向上层计算是否剪枝。剪枝过程将子树删除，叶子节点进行代替。后剪枝可用测试集的准确率判断。</p>
+<ul>
+<li>常见后剪枝方法：降低剪枝 (REP)， 悲观剪枝（PEP），<strong> 代价复杂度剪枝（CCP）</strong>，最小误差剪枝（MEP）。</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预剪枝</td>
+<td>简单高效，适合大规模问题</td>
+<td>阈值选择，可能存在欠拟合风险，测试集可能在之后划分显著提高，但是提前终止了生长</td>
+</tr>
+<tr>
+<td>后剪枝</td>
+<td>相比于预剪枝，可得到泛化强的决策树</td>
+<td>时间开销大</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="3- 如何定义主成分？从该定义出发，如何设计目标函数达到降维提取主成分的目的？针对该目标函数，如何对 PCA 问题求解？"><a href="#3- 如何定义主成分？从该定义出发，如何设计目标函数达到降维提取主成分的目的？针对该目标函数，如何对 PCA 问题求解？" class="headerlink" title="3. 如何定义主成分？从该定义出发，如何设计目标函数达到降维提取主成分的目的？针对该目标函数，如何对 PCA 问题求解？"></a>3. 如何定义主成分？从该定义出发，如何设计目标函数达到降维提取主成分的目的？针对该目标函数，如何对 PCA 问题求解？</h4><p>给定数据向量 ${v_1, …, v_n}$, 以二维坐标为例如下两个图的变化过程。<br><img src="/imgs/bmjqxx/4-1a.png" style="width:80%;height:80%;text-align:center"><br><img src="/imgs/bmjqxx/4-1b.png" style="width:80%;height:80%;text-align:center"></p>
+<ul>
+<li><p>主要目标：降维后图 b 中的黄轴就是主成分的方向。其特点是黄轴上数据更为分散，即方差更大。由此可以看出 PCA 的主要目标，寻找到最大化投影方差。</p>
+</li>
+<li><p>主要目标（数学表达）：对所有样本去中心化 ${x_1, …, x_n} = {v_1-\mu, …, v_n-\mu}$，其中 $\mu = \frac{1}{n}\sum_{i=1}^nv_i$, 某个向量在某个单位向量上的投影公式 $x_i^Tw = |x_i|\cdot|w|\cdot\cos(\theta) = |x_i|\cos(\theta)$, 需要让该方差最大。 </p>
+<script type="math/tex; mode=display">D(x) = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^2 = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^T(x_i^Tw) = w^T(\frac{1}{n}\sum_{i=1}^nx_ix_i^T)w</script><script type="math/tex; mode=display">\max{D(x)}    \\   w^Tw = 1</script></li>
+<li><p>通过求解和线性代数可发现，数据集投影后的方差就是 <strong>协方差矩阵 </strong> 的 <strong> 特征值 </strong>，<strong> 投影的方向 </strong> 就是 特征值对应的 <strong> 特征向量</strong>。</p>
+</li>
+<li><p>PCA 求解方法：</p>
+<ul>
+<li><ol>
+<li>对样本进行中心化处理</li>
+</ol>
+</li>
+<li><ol>
+<li>求样本协方差矩阵</li>
+</ol>
+</li>
+<li><ol>
+<li>对协方差矩阵进行特征值分解，并从大到小排序</li>
+</ol>
+</li>
+<li><ol>
+<li>取特征值前 d 的大的特征向量 $w_1, …, w_d$。 通过映射还原 n 维度到 d 维度<script type="math/tex; mode=display">x_i^’ = [w_1^Tx_i; ..., w_d^Tx_i]</script></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>PCA 降维后的信息占比为： $\eta = \sqrt{\frac{\sum_{i=1}^d{\lambda_i^2}}{\sum_{i=1}^n{\lambda_i^2}}}$</p>
+</li>
+</ul>
+<h4 id="4- 线性判别模型（LDA-linear-discriminant-analysis"><a href="#4- 线性判别模型（LDA-linear-discriminant-analysis" class="headerlink" title="4. 线性判别模型（LDA, linear discriminant analysis)"></a>4. 线性判别模型（LDA, linear discriminant analysis)</h4><ul>
+<li><p>相比于 PCA, LDA 可以作为一种基于标签的有监督的降维方法（如下图具有不同标签，PCA 将映射到 y 轴，相反 LDA 将映射到 x 轴，后者更好）。<br><img src="/imgs/bmjqxx/4-4.png" style="width:80%;height:80%;text-align:center"></p>
+</li>
+<li><p>核心思想：最大化类间间距、最小化类内间距。（同样它对数据的分布做了一些很强的假设。认为每个类数据都是高斯分布，且各个类的协方差相等）。</p>
+</li>
+<li><p>公式推理：以两个类为例子 $C_1, C_2$。</p>
+<ul>
+<li><p>最大化类内间距：需要找到一个投影平面 $w$, 最大化投影后两个类中心之间的距离。  </p>
+<script type="math/tex; mode=display">\mu_1 = \frac{1}{N_1}\sum_{x\in C_1}x, \mu_2 = \frac{1}{N_2}\sum_{x\in C_2}x \\
+\mathop\limits^\sim=w^T\mu_1, \mathop\limits^\sim=w^T\mu_2 \\
+    D(C_1, C_2) = ||\mathop\limits^\sim - \mathop\limits^\sim||^2 \\
+    \max_w||w^T(\mu_1 - \mu_2)||_2^2
+    w^Tw = 1</script><p>当 $w$ 与 $(\mu_1 - \mu_2)$ 方向一致的时候，该距离最大。此时可能出现如下图问题，就是投影后两个类出现了重叠。<br><img src="/imgs/bmjqxx/4-5a.png" style="width:80%;height:80%;text-align:center"></p>
+</li>
+<li><p>最小化类间间距：缩小类间距离，如下图所示，能够改善上图中的问题。<br><img src="/imgs/bmjqxx/4-5b.png" style="width:80%;height:80%;text-align:center"><br>目标函数: $D_1, D_2$ 表示投影后的类间距离</p>
+<script type="math/tex; mode=display">max_wJ(w) = \frac{||w^T(\mu_1 - \mu_2)||_2^2}{D_1 + D_2} \\
+ D_1 = \sum_{x\in C_1}(w^Tx - w^T\mu_1)^2 \\
+ D_2 = \sum_{x\in C_2}(w^Tx - w^T\mu_2)^2 \\
+ J(w) = \frac{w^T(\mu_1-\mu_2)(\mu_1-\mu_2)^Tw}{\sum_{x \in C_i}w^T(x-\mu_i)(x-\mu_i)^Tw} \\
+ 类间散度矩阵： S_B = (\mu_1-\mu_2)(\mu_1-\mu_2)^T \\
+ 类内散度矩阵： S_W = \sum_{x \in C_i}(x-\mu_i)(x-\mu_i)^T \\</script><p>对目标函数求导并令倒数为 0 得到。</p>
+<script type="math/tex; mode=display">S_w^{-1}S_Bw = \alpha w</script></li>
+</ul>
+</li>
+</ul>
+<h4 id="5- 简述 -K- 均值算法的具体步骤"><a href="#5- 简述 -K- 均值算法的具体步骤" class="headerlink" title="5. 简述 K 均值算法的具体步骤"></a>5. 简述 K 均值算法的具体步骤</h4><p>K 均值聚类的核心目标是将给定的数据集分类为 K 个族，并给出每个数据对应的簇中心点。其步骤如下：</p>
+<ul>
+<li><ol>
+<li>数据预处理，如归一化、离群点处理等。</li>
+</ol>
+</li>
+<li><ol>
+<li>随机选取 K 个簇中心，记为 $u_1^{(0)}, …, u_k^{(0)}$。</li>
+</ol>
+</li>
+<li><ol>
+<li>定义代价函数: $J(c, u) = \min_u\min_c\sum_{i=1}^M||x_i - u_{c_i}||^2$</li>
+</ol>
+</li>
+<li><ol>
+<li>令 $t = 0, 1, …$ 为迭代部署，重复下面过程直到 $J$ 收敛。</li>
+</ol>
+</li>
+</ul>
+<h4 id="6-K- 均值算法的优缺点？如何对其调优？"><a href="#6-K- 均值算法的优缺点？如何对其调优？" class="headerlink" title="6. K 均值算法的优缺点？如何对其调优？"></a>6. K 均值算法的优缺点？如何对其调优？</h4><ul>
+<li><p>优点：对于大数据集，K 均值算法是可伸缩和高效的，它的计算复杂度是 O(NKt)线性的，$N, K, t$ 分别表示样本数目，聚类簇数和迭代的轮数。</p>
+</li>
+<li><p>缺点：受初值和离群点的影响，每次结果不稳定，且结果通常是局部最优解不是全局最优解。</p>
+</li>
+</ul>
+
     </div>
 
     
@@ -383,7 +547,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">#</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%20%E5%86%B3%E7%AD%96%E6%A0%91%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1. 决策树之间的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%20%E5%A6%82%E4%BD%95%E5%AF%B9%E5%86%B3%E7%AD%96%E6%A0%91%E8%BF%9B%E8%A1%8C%E5%89%AA%E6%9E%9D"><span class="nav-text">2. 如何对决策树进行剪枝 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%20%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%BB%E6%88%90%E5%88%86%EF%BC%9F%E4%BB%8E%E8%AF%A5%E5%AE%9A%E4%B9%89%E5%87%BA%E5%8F%91%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%BE%BE%E5%88%B0%E9%99%8D%E7%BB%B4%E6%8F%90%E5%8F%96%E4%B8%BB%E6%88%90%E5%88%86%E7%9A%84%E7%9B%AE%E7%9A%84%EF%BC%9F%E9%92%88%E5%AF%B9%E8%AF%A5%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AF%B9%20PCA%20%E9%97%AE%E9%A2%98%E6%B1%82%E8%A7%A3%EF%BC%9F"><span class="nav-text">3. 如何定义主成分？从该定义出发，如何设计目标函数达到降维提取主成分的目的？针对该目标函数，如何对 PCA 问题求解？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%20%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B%EF%BC%88LDA-linear-discriminant-analysis"><span class="nav-text">4. 线性判别模型（LDA, linear discriminant analysis)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%20%E7%AE%80%E8%BF%B0%20-K-%20%E5%9D%87%E5%80%BC%E7%AE%97%E6%B3%95%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-text">5. 简述 K 均值算法的具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-K-%20%E5%9D%87%E5%80%BC%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AF%B9%E5%85%B6%E8%B0%83%E4%BC%98%EF%BC%9F"><span class="nav-text">6. K 均值算法的优缺点？如何对其调优？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -493,7 +657,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">14k</span>
 </div>
 
         

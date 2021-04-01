@@ -356,31 +356,28 @@ td {
   margin-top: 3px;
 }
 .toggle.toggle-arrow .toggle-line-first {
-  left: 50%;
   top: 2px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   width: 50%;
 }
 .toggle.toggle-arrow .toggle-line-middle {
-  left: 2px;
   width: 90%;
 }
 .toggle.toggle-arrow .toggle-line-last {
-  left: 50%;
   top: -2px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
   width: 50%;
 }
 .toggle.toggle-close .toggle-line-first {
-  transform: rotate(-45deg);
   top: 5px;
+  transform: rotate(-45deg);
 }
 .toggle.toggle-close .toggle-line-middle {
   opacity: 0;
 }
 .toggle.toggle-close .toggle-line-last {
-  transform: rotate(45deg);
   top: -5px;
+  transform: rotate(45deg);
 }
 .highlight,
 pre {
@@ -1180,7 +1177,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e4ba65;
+  background: #c9d242;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2466,10 +2463,24 @@ hr {
   border-bottom-color: var(--btn-default-hover-border-color);
 }
 .sidebar {
-  left: -320px;
+  right: -320px;
 }
 .sidebar.sidebar-active {
-  left: 0;
+  right: 0;
+}
+.sidebar-toggle,
+.back-to-top {
+  left: auto;
+  right: 30px;
+}
+@media (max-width: 991px) {
+  .sidebar-toggle,
+  .back-to-top {
+    right: 20px;
+  }
+}
+.book-mark-link {
+  left: 30px;
 }
 .sidebar {
   width: 320px;
@@ -2533,4 +2544,32 @@ hr {
   border: none;
   background-image: none;
   background-color: rgba(0,0,0,0.49);
+}
+body {
+/*background:url(https://source.unsplash.com/1600x900/?water);*/
+  background: url("/images/bg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-size: cover;
+}
+.sidebar {
+  opacity: 0.9;
+}
+.content-wrap {
+  background-color: rgba(255,255,255,0.031);
+}
+.content-wrap .posts-expand {
+  padding-top: 40px;
+}
+.content-wrap article,
+.comments {
+  background-color: #fff;
+  opacity: 0.8;
+}
+.posts-expand .post-block:not(:first-child) {
+  margin-top: 80px;
+}
+header {
+  opacity: 0.5;
 }
