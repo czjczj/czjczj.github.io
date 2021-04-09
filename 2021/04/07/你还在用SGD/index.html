@@ -36,7 +36,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zjcheng.site/imgs/bmjqxx/lookahead.png">
 <meta property="article:published_time" content="2021-04-07T05:46:56.000Z">
-<meta property="article:modified_time" content="2021-04-07T14:00:27.848Z">
+<meta property="article:modified_time" content="2021-04-08T12:47:54.708Z">
 <meta property="article:author" content="zj_cheng">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="深度学习">
@@ -236,10 +236,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-07 13:46:56 / 修改时间：22:00:27" itemprop="dateCreated datePublished" datetime="2021-04-07T13:46:56+08:00">2021-04-07</time>
+              <time title="创建时间：2021-04-07 13:46:56" itemprop="dateCreated datePublished" datetime="2021-04-07T13:46:56+08:00">2021-04-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 20:47:54" itemprop="dateModified" datetime="2021-04-08T20:47:54+08:00">2021-04-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -310,6 +316,7 @@
 </ul>
 <h4 id="2-SGDM-stochastic-gradident-descent-with-momentum"><a href="#2-SGDM-stochastic-gradident-descent-with-momentum" class="headerlink" title="2. SGDM (stochastic gradident descent with momentum)"></a>2. SGDM (stochastic gradident descent with momentum)</h4><p>为了抑制 SGD 的震荡，SGDM 认为梯度下降过程加入了惯性，下坡的实收，如果发现是陡坡，那么惯性下降更快。</p>
 <script type="math/tex; mode=display">m_t = \beta_1m_{t-1} + (1-\beta_1)g_t</script><p>一阶动量是各个时刻梯度方向的指数移动平均值，约等于 <strong>$1/(1-\beta_1)$</strong> 个最近时刻的梯度方法的平均值。</p>
+<span id="more"></span>
 <h4 id="3-3-SGD-with-Nesterov-Acceleration"><a href="#3-3-SGD-with-Nesterov-Acceleration" class="headerlink" title="3. 3 SGD with Nesterov Acceleration"></a>3. 3 SGD with Nesterov Acceleration</h4><p>NAG 全称 Nesterov Accelerated Gradient, 是在 SGD, SGD-M 的基础上进行了改进，主要是在 <strong>步骤 1</strong> 上进行了改进。根据上面公式，时刻 $t$ 的主要下降方向主要由 <strong>累计动量 </strong> 决定，t 时刻的 <strong> 梯度方向 </strong> 说了不算，为此可以先看看跟着累计动量走一步的结果，NAG 主要在步骤 1 中 <strong> 不计算当前位置的梯度方向</strong>，而是按照累积动量走一步。</p>
 <script type="math/tex; mode=display">g_t = \nabla f(w_t - a \cdot m_{t-1} / \sqrt{V_{t-1}})</script><h4 id="4-AdaGrad"><a href="#4-AdaGrad" class="headerlink" title="4. AdaGrad"></a>4. AdaGrad</h4><p>二阶动量的到来，意味着 <strong>自适应学习率</strong> 优化算法的到来。SGD 及其变体以同样的学习率更新每一个参数，而深度神经网络包含大量的参数，这些参数并不是总会得到，对于经常更新的参数，我们已经积累了大量关于它的知识，不希望被单个样本影响太多，希望学习速率慢一点；对于偶尔更新的参数，我们了解的信息太少，希望能从每个偶然的样本上学习一些，即学习率大一些。</p>
 <ul>
@@ -340,7 +347,7 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
 </li>
 </ul>
 <h4 id="7-NAdam-Nesterov-Adam"><a href="#7-NAdam-Nesterov-Adam" class="headerlink" title="7. NAdam (Nesterov + Adam)"></a>7. NAdam (Nesterov + Adam)</h4><script type="math/tex; mode=display">g_t = \nabla f(w_t - m_{t-1}/\sqrt{V_t})</script><h4 id="8-RAdam"><a href="#8-RAdam" class="headerlink" title="8. RAdam"></a>8. RAdam</h4><p>它能够根据方差分散度，动态地打开或者关闭自适应学习率，提供一种不需要可调节参数学习率预热的方法，它兼顾了 Adam 和 SGD 两者的有点，即能保证收敛速度快，也不容易陷入局部最优解，在较大学习率的情况下，精度甚至优于 SGD。</p>
-<h4 id="Lookahead"><a href="#Lookahead" class="headerlink" title="Lookahead"></a>Lookahead</h4><ul>
+<h4 id="9-Lookahead"><a href="#9-Lookahead" class="headerlink" title="9. Lookahead"></a>9. Lookahead</h4><ul>
 <li><p>lookahead 与 其他最优化器是正交的，意味着可以使用 lookahead 加强现有最优化方法的性能</p>
 </li>
 <li><p>它能够有效的降低方差</p>
@@ -354,6 +361,15 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
 <li><p>slow weights 每更新一次， fast weights 将被重置尾目前的 slow weights 值。<br>具体算法如下图所示<br><img src="/imgs/bmjqxx/lookahead.png" style="width:80%;height:60%;text-align:center"></p>
 </li>
 </ul>
+</li>
+</ul>
+<h4 id="10-Warmup- 策略"><a href="#10-Warmup- 策略" class="headerlink" title="10. Warmup 策略"></a>10. Warmup 策略 </h4><p> 热身，在模型刚开始训练的时候是一个非常小的学习率，紧接着模型训练学习率慢慢变大。<br>有效原因：</p>
+<ul>
+<li><p>有助于减缓模型在初始阶段对 mini-batch 的 <strong>提前过拟合</strong>，保持分布的平稳。</p>
+</li>
+<li><p>有助于保持模型深层的稳定性。</p>
+</li>
+<li><p>在刚开始训练的时候，模型的权重是随机初始化的，选择一个较大的学习率，可能带来模型的不稳定（震荡）。</p>
 </li>
 </ul>
 
@@ -399,7 +415,10 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
     <a href="/2021/03/30/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/" rel="prev" title="百面机器学习 (二)">
       <i class="fa fa-chevron-left"></i> 百面机器学习 (二)
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/" rel="next" title="GBDT, Xgboost 和 LightGBM">
+      GBDT, Xgboost 和 LightGBM <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -459,7 +478,7 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SGD-stochastic-gradient-descent-%20%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-text">1. SGD (stochastic gradient descent) 随机梯度下降</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SGDM-stochastic-gradident-descent-with-momentum"><span class="nav-text">2. SGDM (stochastic gradident descent with momentum)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-SGD-with-Nesterov-Acceleration"><span class="nav-text">3. 3 SGD with Nesterov Acceleration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-AdaGrad"><span class="nav-text">4. AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-AdaDelta-RMSProp"><span class="nav-text">5. AdaDelta &#x2F; RMSProp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Adam"><span class="nav-text">6. Adam</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-NAdam-Nesterov-Adam"><span class="nav-text">7. NAdam (Nesterov + Adam)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-RAdam"><span class="nav-text">8. RAdam</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lookahead"><span class="nav-text">Lookahead</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SGD-stochastic-gradient-descent-%20%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-text">1. SGD (stochastic gradient descent) 随机梯度下降</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SGDM-stochastic-gradident-descent-with-momentum"><span class="nav-text">2. SGDM (stochastic gradident descent with momentum)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-SGD-with-Nesterov-Acceleration"><span class="nav-text">3. 3 SGD with Nesterov Acceleration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-AdaGrad"><span class="nav-text">4. AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-AdaDelta-RMSProp"><span class="nav-text">5. AdaDelta &#x2F; RMSProp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Adam"><span class="nav-text">6. Adam</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-NAdam-Nesterov-Adam"><span class="nav-text">7. NAdam (Nesterov + Adam)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-RAdam"><span class="nav-text">8. RAdam</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-Lookahead"><span class="nav-text">9. Lookahead</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-Warmup-%20%E7%AD%96%E7%95%A5"><span class="nav-text">10. Warmup 策略 </span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -475,7 +494,7 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

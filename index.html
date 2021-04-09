@@ -208,6 +208,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="zj_cheng">
+      <meta itemprop="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵大白菜">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/" class="post-title-link" itemprop="url">GBDT, Xgboost 和 LightGBM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-08 20:47:59 / 修改时间：20:54:28" itemprop="dateCreated datePublished" datetime="2021-04-08T20:47:59+08:00">2021-04-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/" class="post-meta-item leancloud_visitors" data-flag-title="GBDT, Xgboost 和 LightGBM" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Xgboost"><a href="#Xgboost" class="headerlink" title="Xgboost"></a>Xgboost</h4><ul>
+<li><p> 目标函数的意义 $Obj(\theta) = L(\theta) + G(\theta)$</p>
+<ul>
+<li><p>$L(\theta)$ 衡量了模型对于训练数据的拟合能力: 均方根 (回归), 逻辑损失 (分类)。</p>
+</li>
+<li><p>$G(\theta)$ 测量了模型的复杂度：L1, L2 正则化。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/07/%E4%BD%A0%E8%BF%98%E5%9C%A8%E7%94%A8SGD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -231,10 +329,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-07 13:46:56 / 修改时间：22:00:27" itemprop="dateCreated datePublished" datetime="2021-04-07T13:46:56+08:00">2021-04-07</time>
+              <time title="创建时间：2021-04-07 13:46:56" itemprop="dateCreated datePublished" datetime="2021-04-07T13:46:56+08:00">2021-04-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 20:47:54" itemprop="dateModified" datetime="2021-04-08T20:47:54+08:00">2021-04-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -290,7 +394,7 @@
 </ol>
 </li>
 <li><ol>
-<li>根据历史梯度计算 <strong>一阶动量 </strong> 和 <strong> 二阶动量</strong>：$m_t=\phi(g_1,…,g_t)$, $V_t=\varphi(g_1,…,g_t)$</li>
+<li>根据历史梯度计算 <strong>一阶动量</strong> 和 <strong>二阶动量</strong>：$m_t=\phi(g_1,…,g_t)$, $V_t=\varphi(g_1,…,g_t)$</li>
 </ol>
 </li>
 <li><ol>
@@ -298,60 +402,21 @@
 </ol>
 </li>
 <li><ol>
-<li>根据下降梯度进行更新：$w_{t+1} = w_t - \eta_t$<h4 id="1-SGD-stochastic-gradient-descent- 随机梯度下降"><a href="#1-SGD-stochastic-gradient-descent- 随机梯度下降" class="headerlink" title="1. SGD (stochastic gradient descent) 随机梯度下降"></a>1. SGD (stochastic gradient descent) 随机梯度下降</h4>SGD 没有动量的概率，即 $m_t=g_t, V_t=I^2$, 即 $\eta_t=a\cdot g_t$</li>
+<li>根据下降梯度进行更新：$w_{t+1} = w_t - \eta_t$<h4 id="1-SGD-stochastic-gradient-descent-随机梯度下降"><a href="#1-SGD-stochastic-gradient-descent-随机梯度下降" class="headerlink" title="1. SGD (stochastic gradient descent) 随机梯度下降"></a>1. SGD (stochastic gradient descent) 随机梯度下降</h4>SGD 没有动量的概率，即 $m_t=g_t, V_t=I^2$, 即 $\eta_t=a\cdot g_t$</li>
 </ol>
 </li>
 <li>缺点：下降速度慢，可能在沟壑的两边持续政党，停留在局部最优点。</li>
 </ul>
 <h4 id="2-SGDM-stochastic-gradident-descent-with-momentum"><a href="#2-SGDM-stochastic-gradident-descent-with-momentum" class="headerlink" title="2. SGDM (stochastic gradident descent with momentum)"></a>2. SGDM (stochastic gradident descent with momentum)</h4><p>为了抑制 SGD 的震荡，SGDM 认为梯度下降过程加入了惯性，下坡的实收，如果发现是陡坡，那么惯性下降更快。</p>
 <script type="math/tex; mode=display">m_t = \beta_1m_{t-1} + (1-\beta_1)g_t</script><p>一阶动量是各个时刻梯度方向的指数移动平均值，约等于 <strong>$1/(1-\beta_1)$</strong> 个最近时刻的梯度方法的平均值。</p>
-<h4 id="3-3-SGD-with-Nesterov-Acceleration"><a href="#3-3-SGD-with-Nesterov-Acceleration" class="headerlink" title="3. 3 SGD with Nesterov Acceleration"></a>3. 3 SGD with Nesterov Acceleration</h4><p>NAG 全称 Nesterov Accelerated Gradient, 是在 SGD, SGD-M 的基础上进行了改进，主要是在 <strong>步骤 1</strong> 上进行了改进。根据上面公式，时刻 $t$ 的主要下降方向主要由 <strong>累计动量 </strong> 决定，t 时刻的 <strong> 梯度方向 </strong> 说了不算，为此可以先看看跟着累计动量走一步的结果，NAG 主要在步骤 1 中 <strong> 不计算当前位置的梯度方向</strong>，而是按照累积动量走一步。</p>
-<script type="math/tex; mode=display">g_t = \nabla f(w_t - a \cdot m_{t-1} / \sqrt{V_{t-1}})</script><h4 id="4-AdaGrad"><a href="#4-AdaGrad" class="headerlink" title="4. AdaGrad"></a>4. AdaGrad</h4><p>二阶动量的到来，意味着 <strong>自适应学习率</strong> 优化算法的到来。SGD 及其变体以同样的学习率更新每一个参数，而深度神经网络包含大量的参数，这些参数并不是总会得到，对于经常更新的参数，我们已经积累了大量关于它的知识，不希望被单个样本影响太多，希望学习速率慢一点；对于偶尔更新的参数，我们了解的信息太少，希望能从每个偶然的样本上学习一些，即学习率大一些。</p>
-<ul>
-<li><p>度量历史更新频率：二阶动量表示所有梯度值的平方和： $V_t = \sum_t g_t^2$</p>
-</li>
-<li><p>$\eta_t = a \cdot m_t / \sqrt{V_t}$, 参数更新越频繁，二阶动量越大，学习率越小。</p>
-</li>
-<li><p>缺点是 $V_t$ 是单调增加的，那么学习率可能减少到 0， 使得训练提前结束。</p>
-</li>
-</ul>
-<h4 id="5-AdaDelta-RMSProp"><a href="#5-AdaDelta-RMSProp" class="headerlink" title="5. AdaDelta / RMSProp"></a>5. AdaDelta / RMSProp</h4><p>改进 AdaGrad 的学习率变化过于激进的缺点，思路是并不累积所有历史提取，而是关注于过去一段时间窗口的下降梯度。</p>
-<script type="math/tex; mode=display">V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script><p>避免二阶动量持续累积，导致训练提前结束的问题了。</p>
-<h4 id="6-Adam"><a href="#6-Adam" class="headerlink" title="6. Adam"></a>6. Adam</h4><ul>
-<li><p><strong>实际的下降方法</strong>：$m_t$;</p>
-</li>
-<li><p><strong>实际的学习速率</strong>：$a / \sqrt{V_t}$</p>
-</li>
-<li><p>SGD-M 在 SGD 上考虑了一阶动量， AdaGrad, AdaDelta 在 SGD 上考虑了二阶动量， 把一阶动量和二阶动量都用起来，就是 Adam（Adapative Momentum）。</p>
-<script type="math/tex; mode=display">m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t \\
-V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
-<li><p>缺点：</p>
-<ul>
-<li><p>可能会不收敛的情况。二阶动量 $V_t$ 在学习的过程中时大时小，产生震荡。学习率递减策略。</p>
-</li>
-<li><p>可能错过全局最优解。主要是 Adam 后期学习率太低了，影响了有效的收敛。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="7-NAdam-Nesterov-Adam"><a href="#7-NAdam-Nesterov-Adam" class="headerlink" title="7. NAdam (Nesterov + Adam)"></a>7. NAdam (Nesterov + Adam)</h4><script type="math/tex; mode=display">g_t = \nabla f(w_t - m_{t-1}/\sqrt{V_t})</script><h4 id="8-RAdam"><a href="#8-RAdam" class="headerlink" title="8. RAdam"></a>8. RAdam</h4><p>它能够根据方差分散度，动态地打开或者关闭自适应学习率，提供一种不需要可调节参数学习率预热的方法，它兼顾了 Adam 和 SGD 两者的有点，即能保证收敛速度快，也不容易陷入局部最优解，在较大学习率的情况下，精度甚至优于 SGD。</p>
-<h4 id="Lookahead"><a href="#Lookahead" class="headerlink" title="Lookahead"></a>Lookahead</h4><ul>
-<li><p>lookahead 与 其他最优化器是正交的，意味着可以使用 lookahead 加强现有最优化方法的性能</p>
-</li>
-<li><p>它能够有效的降低方差</p>
-</li>
-<li><p>Lookahead 是怎么做的</p>
-<ul>
-<li><p>lookahead 会迭代地更新两组权重，slow weights $\phi$ 和 fast weights $\varPhi$, 前者在后者每更新 k 次后更新一次。lookahead 可以将任意标准优化算法 A 作为内部优化器来更新 fast weights.</p>
-</li>
-<li><p>内部优化器 A 进行 k 次更新后，Lookahead 在权重空间 $\phi - \varPhi$ 中进行线性插值更新 slow weights。方向为最后一个 fast weights.</p>
-</li>
-<li><p>slow weights 每更新一次， fast weights 将被重置尾目前的 slow weights 值。<br>具体算法如下图所示<br><img src="/imgs/bmjqxx/lookahead.png" style="width:80%;height:60%;text-align:center"></p>
-</li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/07/%E4%BD%A0%E8%BF%98%E5%9C%A8%E7%94%A8SGD/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1229,7 +1294,7 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
