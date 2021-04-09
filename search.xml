@@ -123,6 +123,30 @@
 </li>
 </ul>
 </li>
+<li><p> 优化目标函数的意义：</p>
+<ul>
+<li><ol>
+<li> 优化 training loss 鼓励模型去学习一个有用的模型 </li>
+</ol>
+</li>
+<li><ol>
+<li> 优化 regularization loss 鼓励去学习一个简单的模型。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p> 对应树结构：$L(\theta)$ 就是各个树的结构，而 $G(\theta)$ 就是树的复杂性 (例如树的节点个数，树的深度等)</p>
+</li>
+<li><p> 目标函数: $\sum<em>{i=1}^{n}l(y_i, \hat{y_i}) + \sum</em>{k}G(f_k), f_k \in \ F$</p>
+<ul>
+<li><p> 面临的问题： 我们不能使用 SGD 去寻找 $f_k$, 因为他们都是树结构，而不是数值向量。</p>
+</li>
+<li><p> 解决方法： 加法训练（Addtive Training or called Boosting）</p>
+<script type="math/tex; mode=display">\hat{y}_i^{(0)}  = 0</script><script type="math/tex; mode=display">\hat{y}_i^{(1)} = f_1(x_i) = \hat{y}_i^{(0)} + f_1(x_i)</script><script type="math/tex; mode=display">\hat{y}_i^{(2)} = f_1(x_i) + f_2(x_i) = \hat{y}_i^{(1)}+f_2(x_i)</script><script type="math/tex; mode=display">\hat{y}_i^{(t)} = \sum_{k=1}^tf_k(x_i) = \hat{y}_i^{(t-1)} + f_t(x_i)</script></li>
+<li><p> 如何决定在第 t 轮加入的 $f_t$<br> 第 t 轮的预测 </p>
+<script type="math/tex; mode=display">\hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + f_t(x_i)</script></li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -136,7 +160,7 @@
   <entry>
     <title>HMM</title>
     <url>/2021/03/25/HMM/</url>
-    <content><![CDATA[<h4 id="1- 马尔可夫性"><a href="#1- 马尔可夫性" class="headerlink" title="1. 马尔可夫性"></a>1. 马尔可夫性 </h4><p> 如果某一时刻 $t \geq 1$ 的随机变量 $x_t$ 与其一时刻随机变量 $x_{t-1}$ 之间有条件分布 $P({x_t}|{x_{t-1}})$, 如果 $x_t$ 与 $t-1$ 时刻之前的状态都没有关系, 仅与 $x_{t-1}$ 状态有关, 这一性质成为马尔科夫性质。</p>
+    <content><![CDATA[<h4 id="1- 马尔可夫性"><a href="#1- 马尔可夫性" class="headerlink" title="1. 马尔可夫性"></a>1. 马尔可夫性 </h4><p> 如果某一时刻 $t \geq 1$ 的随机变量 $x<em>t$ 与其一时刻随机变量 $x</em>{t-1}$ 之间有条件分布 $P({x<em>t}|{x</em>{t-1}})$, 如果 $x<em>t$ 与 $t-1$ 时刻之前的状态都没有关系, 仅与 $x</em>{t-1}$ 状态有关, 这一性质成为马尔科夫性质。</p>
 <script type="math/tex; mode=display">P(X_t|X_1, X_2,...,X_t-1) = P(X_t|X_{t-1})</script><h4 id="2- 马尔科夫过程 -or- 马尔科夫链"><a href="#2- 马尔科夫过程 -or- 马尔科夫链" class="headerlink" title="2. 马尔科夫过程 or 马尔科夫链"></a>2. 马尔科夫过程 or 马尔科夫链 </h4><p> 具有马尔科夫性质的序列被成为马尔科夫链条。</p>
 <script type="math/tex; mode=display">X = (X_1, X_2, ..., X_t)</script><h4 id="3- 马尔科夫链中状态的计算"><a href="#3- 马尔科夫链中状态的计算" class="headerlink" title="3. 马尔科夫链中状态的计算"></a>3. 马尔科夫链中状态的计算 </h4><p> 马尔科夫过程中的 <strong> 状态 $t$</strong> 的状态分布概率的计算，它可以由前一时刻 $t-1$ 的状态分布和状态转移矩阵算出来。</p>
 <script type="math/tex; mode=display">\pi(t) = P\pi(t-1) = P(P\pi(t-2)) = P^2\pi(t-2)</script><p>即 <script type="math/tex">\pi(t) = P^t\pi(0)</script></p>
@@ -146,11 +170,11 @@
 <li>马尔科夫性质: 当前状态只与前一状态有关。</li>
 </ul>
 <h5 id="4-2- 组成"><a href="#4-2- 组成" class="headerlink" title="4.2 组成"></a>4.2 组成</h5><ul>
-<li>状态转移矩阵: $A=[a_{ij}]_{N \times N}$, $a_{ij} = P(y_t=s_j|y_{t-1}=s_i)$。表示 $t-1$ 时刻处于状态 $s_i$ 的时候，在 $t$ 时刻处于 $s_j$ 的概率。</li>
-<li>观测概率矩阵: $B=[b_{ij}]_{N \times M}$, $b_{ij} = P(x_t=o_j|y_t=s_i)$。表示在 $t$ 时刻处于状态 $s_i$, 生成观测值 $o_j$ 的概率。</li>
+<li>状态转移矩阵: $A=[a<em>{ij}]</em>{N \times N}$, $a<em>{ij} = P(y_t=s_j|y</em>{t-1}=s_i)$。表示 $t-1$ 时刻处于状态 $s_i$ 的时候，在 $t$ 时刻处于 $s_j$ 的概率。</li>
+<li>观测概率矩阵: $B=[b<em>{ij}]</em>{N \times M}$, $b_{ij} = P(x_t=o_j|y_t=s_i)$。表示在 $t$ 时刻处于状态 $s_i$, 生成观测值 $o_j$ 的概率。</li>
 <li>初始状态概率: $\pi=(\pi_1, \pi_2, …, \pi_N)$, $\pi_i=P(y_1=s_i)$。表示初始状态为 $s_i$ 的概率。</li>
 </ul>
-<h5 id="4-3- 联合概率分布"><a href="#4-3- 联合概率分布" class="headerlink" title="4.3 联合概率分布"></a>4.3 联合概率分布</h5><p>$P(o_1,s_1,…,o_t,s_t) = P(s_1)P(o_1|s_1)\prod_{i=2}^{t}P(s_i|s_{i-1})P(o_i|s_i)$</p>
+<h5 id="4-3- 联合概率分布"><a href="#4-3- 联合概率分布" class="headerlink" title="4.3 联合概率分布"></a>4.3 联合概率分布</h5><p>$P(o<em>1,s_1,…,o_t,s_t) = P(s_1)P(o_1|s_1)\prod</em>{i=2}^{t}P(s<em>i|s</em>{i-1})P(o_i|s_i)$</p>
 <h5 id="4-4- 定义"><a href="#4-4- 定义" class="headerlink" title="4.4 定义"></a>4.4 定义 </h5><p> 通过状态集合 $Q$, 观测集合 $V$, 观测概率矩阵 $B$, 状态转移矩阵 $A$, 初始状态概率向量 $\pi$, 确定一个隐马尔科夫模型，即为:</p>
 <script type="math/tex; mode=display">\lambda = (A, B, \pi)</script><h5 id="4-5- 三个基本问题"><a href="#4-5- 三个基本问题" class="headerlink" title="4.5 三个基本问题"></a>4.5 三个基本问题</h5><ul>
 <li>识别问题(概率计算算法, 也成为前向算法): 给定模型 $\lambda = (A, B, \pi)$ -&gt; 计算模型与观测序列的匹配程度 $P(O|\lambda)$<ul>
@@ -696,15 +720,10 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
 <script type="math/tex; mode=display">\max\limits_{w, b}\frac{2}{||w||}</script><script type="math/tex; mode=display">y_i (w_T\cdot x_i + b) > 0, i=1,...,m</script><script type="math/tex; mode=display">\min\limits_i |w^T \cdot x_i + b| = 1</script><p>转化为：其中在支持向量上的点取到等于符号</p>
 <script type="math/tex; mode=display">\min\limits_{w, b}\frac{1}{2}w^T\cdot w</script><script type="math/tex; mode=display">y_i (w_T\cdot x_i + b) \geq 1, i=1,..., m</script></li>
 <li><p>定义 6 拉格朗日函数，对于优化问题</p>
-<script type="math/tex; mode=display">\min\limits_u f(u) \\
-  g_i(u) \leq 0, i=1,..., m \\
-  h_j(u) = 0, j=1,..., n</script><p>拉格朗日函数形式为:</p>
-<script type="math/tex; mode=display">
-  L(u, \alpha, \beta) = f(u) + \sum_i\alpha_ig_i(u) + \sum_j\beta_j(u) \\
-  \alpha_i \geq 0</script></li>
+<script type="math/tex; mode=display">\min\limits_u f(u)</script><script type="math/tex; mode=display">g_i(u) \leq 0, i=1,..., m</script><script type="math/tex; mode=display">h_j(u) = 0, j=1,..., n</script><p>拉格朗日函数形式为:</p>
+<script type="math/tex; mode=display">L(u, \alpha, \beta) = f(u) + \sum_i\alpha_ig_i(u) + \sum_j\beta_j(u)</script><script type="math/tex; mode=display">\alpha_i \geq 0</script></li>
 <li><p>推理 7. 结合定理 5 和 6，优化公式：</p>
-<script type="math/tex; mode=display">\min\limits_{u}\max\limits_{\alpha, \beta} L(u, \alpha, \beta) \\
-  \alpha_i \geq 0, i = 1,..., m.</script></li>
+<script type="math/tex; mode=display">\min\limits_{u}\max\limits_{\alpha, \beta} L(u, \alpha, \beta)</script><script type="math/tex; mode=display">\alpha_i \geq 0, i = 1,..., m.</script></li>
 <li><p>KKT 条件（推理 7）描述的优化为题在最优值处必须满足如下条件：</p>
 <ul>
 <li><p>主问题可行: $g_i(u) \leq 0, h_j(u) = 0$。</p>
@@ -716,21 +735,13 @@ V_t = \beta_2 V_{t-1} + (1 - \beta_2) g_t^2</script></li>
 </ul>
 </li>
 <li><p>对偶问题(推理 7 优化的对偶问题)， 且对偶问题是主问题（推理 7）的下界。</p>
-<script type="math/tex; mode=display">\max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta) \\
-  \alpha_i \geq 0, i = 1, ..., m \\
-  \max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta) \leq \min_{u}\max_{\alpha, \beta} L(u, \alpha, \beta)</script></li>
+<script type="math/tex; mode=display">\max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta)</script><script type="math/tex; mode=display">\alpha_i \geq 0, i = 1, ..., m</script><script type="math/tex; mode=display">\max_{\alpha, \beta}\min_{u} L(u, \alpha, \beta) \leq \min_{u}\max_{\alpha, \beta} L(u, \alpha, \beta)</script></li>
 <li><p>线性支持向量机的拉格朗日形式：</p>
-<script type="math/tex; mode=display">L(w, b, a) = \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)] \\
-a_i \geq 0, i=1, ..., m</script><p>其对偶问题为:</p>
-<script type="math/tex; mode=display">\max_a\min_{w, b} \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)] \\
-a_i \geq 0, i=1, ..., m</script></li>
+<script type="math/tex; mode=display">L(w, b, a) = \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)]</script><script type="math/tex; mode=display">a_i \geq 0, i=1, ..., m</script><p>其对偶问题为:</p>
+<script type="math/tex; mode=display">\max_a\min_{w, b} \frac{1}{2}w^Tw + \sum_{i=1}^m a_i[1 - y_i(w^T \cdot x_i + b)]</script><script type="math/tex; mode=display">a_i \geq 0, i=1, ..., m</script></li>
 <li><p>线性支持向量机的对偶问题等价于找到一组合适的参数 a, 使得。</p>
-<script type="math/tex; mode=display">
-  \min_a \frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_jx_i^Tx_j - \sum_{i-1}^ma_i \\
-  \sum_{i=1}^ma_iy_i = 0 \\
-  a_i \geq 0, i=1, ..., m</script><p>根据内层对 $(w, b)$ 求导，然后令偏导等于 0， 得到（w, b）的最优值。</p>
-<script type="math/tex; mode=display">\frac{\partial L}{\partial w}=0 \to w = \sum_{i=1}^ma_iy_ix_i \\
-  \frac{\partial L}{\partial b}=0 \to     \sum_{i=1}^ma_iy_i = 0</script></li>
+<script type="math/tex; mode=display">\min_a \frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_jx_i^Tx_j - \sum_{i-1}^ma_i</script><script type="math/tex; mode=display">\sum_{i=1}^ma_iy_i = 0</script><script type="math/tex; mode=display">a_i \geq 0, i=1, ..., m</script><p>根据内层对 $(w, b)$ 求导，然后令偏导等于 0， 得到（w, b）的最优值。</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial w}=0 \to w = \sum_{i=1}^ma_iy_ix_i</script><script type="math/tex; mode=display">\frac{\partial L}{\partial b}=0 \to     \sum_{i=1}^ma_iy_i = 0</script></li>
 <li><p>线性支持向量机的 KKT 条件：</p>
 <ul>
 <li><p>主问题可行：  $1 - y_i(w^Tx_i + b) \leq 0$</p>
@@ -809,8 +820,7 @@ a_i \geq 0, i=1, ..., m</script></li>
 <li><p>软间隔: 前面的公式都是假设样本完全是线性可分的（虽然理论上总能找到一个高维映射使数据线性可分。但是实际任务中找到这样的核函数是非常难的）</p>
 </li>
 <li><p>软间隔支持向量机基本类型（离散型）：在优化间隔的同时，允许分类错误的样本出现，但是这类样本需要尽可能少。</p>
-<script type="math/tex; mode=display">\min_{w,b}\frac{1}{2}w^Tw + C\sum_{i=1}^mI(y_i \neq sign(w^T\phi(x_i) + b)) \\
-  y_i(w^T\phi(x_i) + b) \geq 1, if y_i = sign(w^T\phi(x_i) + b)</script><p>$C$ 是个可调节参数用于权衡优化间隔的超参数。</p>
+<script type="math/tex; mode=display">\min_{w,b}\frac{1}{2}w^Tw + C\sum_{i=1}^mI(y_i \neq sign(w^T\phi(x_i) + b))</script><script type="math/tex; mode=display">y_i(w^T\phi(x_i) + b) \geq 1, if y_i = sign(w^T\phi(x_i) + b)</script><p>$C$ 是个可调节参数用于权衡优化间隔的超参数。</p>
 </li>
 <li><p>软间隔支持向量机基本型（连续型）：为了使优化函数问题保持为二次规划问题，引入连续值变量（松弛变量 $\xi_i$ ) 用以度量样本违背约束的程度。</p>
 <ul>
@@ -819,25 +829,15 @@ a_i \geq 0, i=1, ..., m</script></li>
 <li><p>否则, $\xi_i = 1 - y_i(w^T\phi(x_i) + b)$ (hinge loss)</p>
 </li>
 </ul>
-<script type="math/tex; mode=display">\min_{w, b, \xi}\frac{1}{2}w^Tw + C \sum_{i=1}^m \xi_i \\
-  y_i(w^T\phi(x_i) + b) \geq 1 - \xi_i, i = 1, ..., m \\
-  \xi_i \geq 0, i = 1, ..., m</script></li>
+<script type="math/tex; mode=display">\min_{w, b, \xi}\frac{1}{2}w^Tw + C \sum_{i=1}^m \xi_i</script><script type="math/tex; mode=display">y_i(w^T\phi(x_i) + b) \geq 1 - \xi_i, i = 1, ..., m</script><script type="math/tex; mode=display">\xi_i \geq 0, i = 1, ..., m</script></li>
 <li><p>软间隔支持向量机对偶型：其对偶问题等价于找到一组合适的 a， 使得</p>
-<script type="math/tex; mode=display">\min_a\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_j\phi(x_i)^T\phi(x_j) - \sum_{i=1}^ma_i \\
-\sum_{i=1}^ma_iy_i = 0 \\
-0 \leq a_i \leq C , i = 1, ..., m</script></li>
+<script type="math/tex; mode=display">\min_a\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^ma_ia_jy_iy_j\phi(x_i)^T\phi(x_j) - \sum_{i=1}^ma_i</script><script type="math/tex; mode=display">\sum_{i=1}^ma_iy_i = 0</script><script type="math/tex; mode=display">0 \leq a_i \leq C , i = 1, ..., m</script></li>
 <li><p>软间隔支持向量机的拉格朗日函数:</p>
 <script type="math/tex; mode=display">L(w, b, \xi, a, \beta) = \frac{1}{2}w^Tw + C\sum_{i=1}^m\xi_i + \sum_{i=1}^ma_i(1-\xi_i-y_i(w^T\phi(x_i)+b))+\sum_{i=1}^m\beta_i(-\xi_i)</script><p>对偶问题：</p>
-<script type="math/tex; mode=display">\max_{a, \beta}\min_{w, b, \xi} L(w, b, \xi, a, \xi) \\
-  a_i \geq 0, i = 1, ..., m \\
-  \beta_i \geq 0, i = 1, ..., m</script><p>内层对 $(w, b, \xi)$ 求导并令偏导等于 0.</p>
-<script type="math/tex; mode=display">
-\frac{\partial L}{\partial w} = 0 \to w = \sum_{i=1}^ma_iy_i\phi(x_i) \\
-\frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^ma_iy_i = 0 \\
-\frac{\partial L}{\partial \xi} = 0 \to a_i + \beta_i = C \\
-\beta_i = C - a_i \geq 0 \to 0 \leq a_i \leq C</script></li>
+<script type="math/tex; mode=display">\max_{a, \beta}\min_{w, b, \xi} L(w, b, \xi, a, \xi)</script><script type="math/tex; mode=display">a_i \geq 0, i = 1, ..., m</script><script type="math/tex; mode=display">\beta_i \geq 0, i = 1, ..., m</script></li>
 </ul>
-]]></content>
+<p>  内层对 $(w, b, \xi)$ 求导并令偏导等于 0.</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial w} = 0 \to w = \sum_{i=1}^ma_iy_i\phi(x_i)</script><script type="math/tex; mode=display">\frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^ma_iy_i = 0</script><script type="math/tex; mode=display">\frac{\partial L}{\partial \xi} = 0 \to a_i + \beta_i = C</script><script type="math/tex; mode=display">\beta_i = C - a_i \geq 0 \to 0 \leq a_i \leq C</script>]]></content>
       <categories>
         <category>面试</category>
       </categories>
@@ -924,8 +924,8 @@ a_i \geq 0, i=1, ..., m</script></li>
 <ul>
 <li><p>主要目标：降维后图 b 中的黄轴就是主成分的方向。其特点是黄轴上数据更为分散，即方差更大。由此可以看出 PCA 的主要目标，寻找到最大化投影方差。</p>
 </li>
-<li><p>主要目标（数学表达）：对所有样本去中心化 ${x_1, …, x_n} = {v_1-\mu, …, v_n-\mu}$，其中 $\mu = \frac{1}{n}\sum_{i=1}^nv_i$, 某个向量在某个单位向量上的投影公式 $x_i^Tw = |x_i|\cdot|w|\cdot\cos(\theta) = |x_i|\cos(\theta)$, 需要让该方差最大。 </p>
-<script type="math/tex; mode=display">D(x) = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^2 = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^T(x_i^Tw) = w^T(\frac{1}{n}\sum_{i=1}^nx_ix_i^T)w</script><script type="math/tex; mode=display">\max{D(x)}    \\   w^Tw = 1</script></li>
+<li><p>主要目标（数学表达）：对所有样本去中心化 ${x<em>1, …, x_n} = {v_1-\mu, …, v_n-\mu}$，其中 $\mu = \frac{1}{n}\sum</em>{i=1}^nv_i$, 某个向量在某个单位向量上的投影公式 $x_i^Tw = |x_i|\cdot|w|\cdot\cos(\theta) = |x_i|\cos(\theta)$, 需要让该方差最大。 </p>
+<script type="math/tex; mode=display">D(x) = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^2 = \frac{1}{n}\sum_{i=1}^n(x_i^Tw)^T(x_i^Tw) = w^T(\frac{1}{n}\sum_{i=1}^nx_ix_i^T)w</script><script type="math/tex; mode=display">\max{D(x)}</script><script type="math/tex; mode=display">w^Tw = 1</script></li>
 <li><p>通过求解和线性代数可发现，数据集投影后的方差就是 <strong>协方差矩阵 </strong> 的 <strong> 特征值 </strong>，<strong> 投影的方向 </strong> 就是 特征值对应的 <strong> 特征向量</strong>。</p>
 </li>
 <li><p>PCA 求解方法：</p>
@@ -948,7 +948,7 @@ a_i \geq 0, i=1, ..., m</script></li>
 </li>
 </ul>
 </li>
-<li><p>PCA 降维后的信息占比为： $\eta = \sqrt{\frac{\sum_{i=1}^d{\lambda_i^2}}{\sum_{i=1}^n{\lambda_i^2}}}$</p>
+<li><p>PCA 降维后的信息占比为： $\eta = \sqrt{\frac{\sum<em>{i=1}^d{\lambda_i^2}}{\sum</em>{i=1}^n{\lambda_i^2}}}$</p>
 </li>
 </ul>
 <h4 id="4- 线性判别模型（LDA-linear-discriminant-analysis"><a href="#4- 线性判别模型（LDA-linear-discriminant-analysis" class="headerlink" title="4. 线性判别模型（LDA, linear discriminant analysis)"></a>4. 线性判别模型（LDA, linear discriminant analysis)</h4><ul>
@@ -959,19 +959,13 @@ a_i \geq 0, i=1, ..., m</script></li>
 <li><p>公式推理：以两个类为例子 $C_1, C_2$。</p>
 <ul>
 <li><p>最大化类内间距：需要找到一个投影平面 $w$, 最大化投影后两个类中心之间的距离。  </p>
-<script type="math/tex; mode=display">\mu_1 = \frac{1}{N_1}\sum_{x\in C_1}x, \mu_2 = \frac{1}{N_2}\sum_{x\in C_2}x \\
-\mathop\limits^\sim=w^T\mu_1, \mathop\limits^\sim=w^T\mu_2 \\
-    D(C_1, C_2) = ||\mathop\limits^\sim - \mathop\limits^\sim||^2 \\
-    \max_w||w^T(\mu_1 - \mu_2)||_2^2
+<script type="math/tex; mode=display">\mu_1 = \frac{1}{N_1}\sum_{x\in C_1}x, \mu_2 = \frac{1}{N_2}\sum_{x\in C_2}x</script><script type="math/tex; mode=display">
+\mathop\limits^\sim=w^T\mu_1, \mathop\limits^\sim=w^T\mu_2</script><script type="math/tex; mode=display">D(C_1, C_2) = ||\mathop\limits^\sim - \mathop\limits^\sim||^2</script><script type="math/tex; mode=display">\max_w||w^T(\mu_1 - \mu_2)||_2^2
     w^Tw = 1</script><p>当 $w$ 与 $(\mu_1 - \mu_2)$ 方向一致的时候，该距离最大。此时可能出现如下图问题，就是投影后两个类出现了重叠。<br><img src="/imgs/bmjqxx/4-5a.png" style="width:80%;height:80%;text-align:center"></p>
 </li>
 <li><p>最小化类间间距：缩小类间距离，如下图所示，能够改善上图中的问题。<br><img src="/imgs/bmjqxx/4-5b.png" style="width:80%;height:80%;text-align:center"><br>目标函数: $D_1, D_2$ 表示投影后的类间距离</p>
-<script type="math/tex; mode=display">max_wJ(w) = \frac{||w^T(\mu_1 - \mu_2)||_2^2}{D_1 + D_2} \\
- D_1 = \sum_{x\in C_1}(w^Tx - w^T\mu_1)^2 \\
- D_2 = \sum_{x\in C_2}(w^Tx - w^T\mu_2)^2 \\
- J(w) = \frac{w^T(\mu_1-\mu_2)(\mu_1-\mu_2)^Tw}{\sum_{x \in C_i}w^T(x-\mu_i)(x-\mu_i)^Tw} \\
- 类间散度矩阵： S_B = (\mu_1-\mu_2)(\mu_1-\mu_2)^T \\
- 类内散度矩阵： S_W = \sum_{x \in C_i}(x-\mu_i)(x-\mu_i)^T \\</script><p>对目标函数求导并令倒数为 0 得到。</p>
+<script type="math/tex; mode=display">max_wJ(w) = \frac{||w^T(\mu_1 - \mu_2)||_2^2}{D_1 + D_2}</script><script type="math/tex; mode=display">
+ D_1 = \sum_{x\in C_1}(w^Tx - w^T\mu_1)^2</script><script type="math/tex; mode=display">D_2 = \sum_{x\in C_2}(w^Tx - w^T\mu_2)^2</script><script type="math/tex; mode=display">J(w) = \frac{w^T(\mu_1-\mu_2)(\mu_1-\mu_2)^Tw}{\sum_{x \in C_i}w^T(x-\mu_i)(x-\mu_i)^Tw}</script><script type="math/tex; mode=display">类间散度矩阵： S_B = (\mu_1-\mu_2)(\mu_1-\mu_2)^T</script><script type="math/tex; mode=display">类内散度矩阵： S_W = \sum_{x \in C_i}(x-\mu_i)(x-\mu_i)^T</script><p>对目标函数求导并令倒数为 0 得到。</p>
 <script type="math/tex; mode=display">S_w^{-1}S_Bw = \alpha w</script></li>
 </ul>
 </li>
@@ -987,7 +981,7 @@ a_i \geq 0, i=1, ..., m</script></li>
 </ol>
 </li>
 <li><ol>
-<li>定义代价函数: $J(c, u) = \min_u\min_c\sum_{i=1}^M||x_i - u_{c_i}||^2$</li>
+<li>定义代价函数: $J(c, u) = \min<em>u\min_c\sum</em>{i=1}^M||x<em>i - u</em>{c_i}||^2$</li>
 </ol>
 </li>
 <li><ol>
@@ -1073,9 +1067,7 @@ a_i \geq 0, i=1, ..., m</script></li>
 <li><p>聚类算法的评估：</p>
 <ul>
 <li><p>CH 指标 (Calinski-Harabasz)：</p>
-<script type="math/tex; mode=display">CH(K) = \frac{tr(B) / (K - 1)}{tr(W) / (N - K)} \\
- tr(B) = \sum_{j=i}^k||z_j - z||^2 \\
- tr(W) = \sum_{j=1}^k\sum_{x_{i} \in z_k} ||x_i - z_j||^2</script></li>
+<script type="math/tex; mode=display">CH(K) = \frac{tr(B) / (K - 1)}{tr(W) / (N - K)}</script><script type="math/tex; mode=display">tr(B) = \sum_{j=i}^k||z_j - z||^2</script><script type="math/tex; mode=display">tr(W) = \sum_{j=1}^k\sum_{x_{i} \in z_k} ||x_i - z_j||^2</script></li>
 <li><p>轮廓系数 (Silhouette Coefficient):<br>每个样本都对应轮廓系数，其由两部分组成：$a$: 样本与同一簇中其他样本的平均距离。 $b$: 样本距离最近簇类中所有样本点的平均距离。<br>轮廓系数：</p>
 <script type="math/tex; mode=display">
 s = \frac{b - a}{max(a, b)}</script></li>
