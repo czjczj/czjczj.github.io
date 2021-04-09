@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjcheng.site/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%B8%80)/</loc>
+    
+    <lastmod>2021-04-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjcheng.site/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/</loc>
     
     <lastmod>2021-04-08</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://zjcheng.site/about/index.html</loc>
     
     <lastmod>2021-04-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjcheng.site/2021/03/28/%E7%99%BE%E9%9D%A2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0(%E4%B8%80)/</loc>
-    
-    <lastmod>2021-03-31</lastmod>
     
   </url>
   

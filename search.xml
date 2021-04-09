@@ -831,10 +831,11 @@ a_i \geq 0, i=1, ..., m</script></li>
 <script type="math/tex; mode=display">\max_{a, \beta}\min_{w, b, \xi} L(w, b, \xi, a, \xi) \\
   a_i \geq 0, i = 1, ..., m \\
   \beta_i \geq 0, i = 1, ..., m</script><p>内层对 $(w, b, \xi)$ 求导并令偏导等于 0.</p>
-<script type="math/tex; mode=display">\frac{\partial L}{\partial w} = 0 \to w = \sum_{i=1}^ma_iy_i\phi(x_i) \\
-  \frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^ma_iy_i = 0 \\
-  \frac{\partial L}{\partial \xi} = 0 \to a_i + \beta_i = C \\
-  \beta_i = C - a_i \geq 0 \to 0 \leq a_i \leq C</script></li>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial w} = 0 \to w = \sum_{i=1}^ma_iy_i\phi(x_i) \\
+\frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^ma_iy_i = 0 \\
+\frac{\partial L}{\partial \xi} = 0 \to a_i + \beta_i = C \\
+\beta_i = C - a_i \geq 0 \to 0 \leq a_i \leq C</script></li>
 </ul>
 ]]></content>
       <categories>
