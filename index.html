@@ -208,6 +208,250 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="zj_cheng">
+      <meta itemprop="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵大白菜">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">白板推导 - 机器学习 - 线性分类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-20 09:51:41" itemprop="dateCreated datePublished" datetime="2021-04-20T09:51:41+08:00">2021-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-27 21:45:03" itemprop="dateModified" datetime="2021-04-27T21:45:03+08:00">2021-04-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" class="post-meta-item leancloud_visitors" data-flag-title="白板推导 - 机器学习 - 线性分类" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-线性分类-背景"><a href="#1-线性分类-背景" class="headerlink" title="1. 线性分类-背景"></a>1. 线性分类-背景</h4><p>Linear Regression: $f(w, b) = w^T x + b$</p>
+<ul>
+<li><p>线性：</p>
+<ul>
+<li>属性非线性： 特征转换（多项式回归）</li>
+<li>全局非线性： 线性分类（激活函数是非线性）</li>
+<li>系数非线性： 神经网络，感知机</li>
+</ul>
+</li>
+<li><p>全局性：线性样条回归，决策树</p>
+</li>
+<li><p>数据未加工： PCA,  流形</p>
+</li>
+</ul>
+<p>分类：</p>
+<ul>
+<li><p>硬分类： 0 或者 1</p>
+<ul>
+<li>线性判别模型 fisher:</li>
+<li>感知机</li>
+</ul>
+</li>
+<li><p>软分类： 0 到 1 的概率值</p>
+<ul>
+<li>生成式：高斯判别模型</li>
+<li>判别式：逻辑回归</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="zj_cheng">
+      <meta itemprop="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵大白菜">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">白板推导 - 机器学习 (数学基础)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-12 19:56:09" itemprop="dateCreated datePublished" datetime="2021-04-12T19:56:09+08:00">2021-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-27 21:45:22" itemprop="dateModified" datetime="2021-04-27T21:45:22+08:00">2021-04-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="白板推导 - 机器学习 (数学基础)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-频率派-vs-贝叶斯派"><a href="#1-频率派-vs-贝叶斯派" class="headerlink" title="1. 频率派 vs 贝叶斯派"></a>1. 频率派 vs 贝叶斯派</h4><p>数据： $X = (x_1, x_2, …, x_n)^T_{N \times p}$  参数:  $\theta$</p>
+<ul>
+<li><p>频率派: $\theta$ 是未知参数，$X$ 是随机变量(r.v.)</p>
+<p>MLE: $\theta = \argmax_{\theta} P(X | \theta)$</p>
+<p>引申为统计机器学习，构造loss function. 进行梯度下降法等参数优化训练</p>
+</li>
+<li><p>贝叶斯派：$\theta$为 r.v., 且具有先验分布 $\theta \sim P(\theta)$</p>
+<p>MAP: $\theta = \argmax_{\theta} P(\theta | X) = \argmax_{\theta} P(X|\theta)\cdot P(\theta)$</p>
+<p>贝叶斯估计：$P(\theta | X) = \frac{P(X | \theta)P(\theta)}{\int_{\theta}P(X|\theta)P(\theta) d\theta}$</p>
+<p>贝叶斯预测：给定观测 $\hat{x}$, $P(\hat{x}|X) = \int_{\theta}P(\hat{x},\theta|X) = \int_{\theta}P(\hat{x}|\theta)P(\theta|X) d\theta$</p>
+<p>引申为概率图模型，求积分， MCMC(蒙特卡洛采样)</p>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -239,7 +483,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-09 12:34:31" itemprop="dateModified" datetime="2021-04-09T12:34:31+08:00">2021-04-09</time>
+                <time title="修改时间：2021-04-27 21:44:54" itemprop="dateModified" datetime="2021-04-27T21:44:54+08:00">2021-04-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,41 +527,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="Xgboost"><a href="#Xgboost" class="headerlink" title="Xgboost"></a>Xgboost</h4><ul>
-<li><p> 目标函数的意义 $Obj(\theta) = L(\theta) + G(\theta)$</p>
+          <h4 id="1-Xgboost"><a href="#1-Xgboost" class="headerlink" title="1. Xgboost"></a>1. Xgboost</h4><ul>
+<li><p>目标函数的意义 $Obj(\theta) = L(\theta) + G(\theta)$</p>
 <ul>
-<li><p>$L(\theta)$ 衡量了模型对于训练数据的拟合能力: 均方根 (回归), 逻辑损失 (分类)。</p>
+<li><p>$L(\theta)$ 衡量了模型对于训练数据的拟合能力: 均方根(回归), 逻辑损失(分类)。</p>
 </li>
 <li><p>$G(\theta)$ 测量了模型的复杂度：L1, L2 正则化。</p>
 </li>
 </ul>
 </li>
-<li><p> 优化目标函数的意义：</p>
+<li><p>优化目标函数的意义：</p>
 <ul>
 <li><ol>
-<li> 优化 training loss 鼓励模型去学习一个有用的模型 </li>
+<li>优化 training loss 鼓励模型去学习一个有用的模型</li>
 </ol>
 </li>
-<li><ol>
-<li> 优化 regularization loss 鼓励去学习一个简单的模型。</li>
+<li><ol start="2">
+<li>优化 regularization loss 鼓励去学习一个简单的模型。</li>
 </ol>
 </li>
 </ul>
 </li>
-<li><p> 对应树结构：$L(\theta)$ 就是各个树的结构，而 $G(\theta)$ 就是树的复杂性 (例如树的节点个数，树的深度等)</p>
+<li><p>对应树结构：$L(\theta)$ 就是各个树的结构，而$G(\theta)$ 就是树的复杂性(例如树的节点个数，树的深度等)</p>
 </li>
-<li><p> 目标函数: $\sum<em>{i=1}^{n}l(y_i, \hat{y_i}) + \sum</em>{k}G(f_k), f_k \in \ F$</p>
+<li><p>目标函数: $\sum_{i=1}^{n}l(y_i, \hat{y_i}) + \sum_{k}G(f_k), f_k \in \ F$</p>
 <ul>
-<li><p> 面临的问题： 我们不能使用 SGD 去寻找 $f_k$, 因为他们都是树结构，而不是数值向量。</p>
+<li><p>面临的问题： 我们不能使用 SGD 去寻找 $f_k$, 因为他们都是树结构，而不是数值向量。</p>
 </li>
-<li><p> 解决方法： 加法训练（Addtive Training or called Boosting）</p>
-<script type="math/tex; mode=display">\hat{y}_i^{(0)}  = 0</script><script type="math/tex; mode=display">\hat{y}_i^{(1)} = f_1(x_i) = \hat{y}_i^{(0)} + f_1(x_i)</script><script type="math/tex; mode=display">\hat{y}_i^{(2)} = f_1(x_i) + f_2(x_i) = \hat{y}_i^{(1)}+f_2(x_i)</script><script type="math/tex; mode=display">\hat{y}_i^{(t)} = \sum_{k=1}^tf_k(x_i) = \hat{y}_i^{(t-1)} + f_t(x_i)</script></li>
-<li><p> 如何决定在第 t 轮加入的 $f_t$<br> 第 t 轮的预测 </p>
-<script type="math/tex; mode=display">\hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + f_t(x_i)</script></li>
-</ul>
+<li><p>解决方法： 加法训练（Addtive Training or called Boosting）<br>$$ \hat{y}_i^{(0)}  = 0 $$<br>$$ \hat{y}_i^{(1)} = f_1(x_i) = \hat{y}_i^{(0)} + f_1(x_i) $$<br>$$ \hat{y}_i^{(2)} = f_1(x_i) + f_2(x_i) = \hat{y}_i^{(1)}+f_2(x_i) $$<br>$$ \hat{y}<em>i^{(t)} = \sum</em>{k=1}^tf_k(x_i) = \hat{y}_i^{(t-1)} + f_t(x_i) $$</p>
+</li>
+<li><p>如何决定在第 t 轮加入的 $f_t$<br>第 t 轮的预测<br>$$ \hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + f_t(x_i)</p>
 </li>
 </ul>
-
+<p> $$</p>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -367,7 +619,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-08 20:47:54" itemprop="dateModified" datetime="2021-04-08T20:47:54+08:00">2021-04-08</time>
+                <time title="修改时间：2021-04-09 12:39:31" itemprop="dateModified" datetime="2021-04-09T12:39:31+08:00">2021-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,22 +675,21 @@
 <li>计算目标函数关于当前参数梯度： $g_t = \nabla f(w_t)$</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="2">
 <li>根据历史梯度计算 <strong>一阶动量</strong> 和 <strong>二阶动量</strong>：$m_t=\phi(g_1,…,g_t)$, $V_t=\varphi(g_1,…,g_t)$</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="3">
 <li>计算当前时刻的下降梯度：$\eta_t = a \cdot m_t / \sqrt{V_t}$</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="4">
 <li>根据下降梯度进行更新：$w_{t+1} = w_t - \eta_t$<h4 id="1-SGD-stochastic-gradient-descent-随机梯度下降"><a href="#1-SGD-stochastic-gradient-descent-随机梯度下降" class="headerlink" title="1. SGD (stochastic gradient descent) 随机梯度下降"></a>1. SGD (stochastic gradient descent) 随机梯度下降</h4>SGD 没有动量的概率，即 $m_t=g_t, V_t=I^2$, 即 $\eta_t=a\cdot g_t$</li>
 </ol>
 </li>
 <li>缺点：下降速度慢，可能在沟壑的两边持续政党，停留在局部最优点。</li>
 </ul>
-<h4 id="2-SGDM-stochastic-gradident-descent-with-momentum"><a href="#2-SGDM-stochastic-gradident-descent-with-momentum" class="headerlink" title="2. SGDM (stochastic gradident descent with momentum)"></a>2. SGDM (stochastic gradident descent with momentum)</h4><p>为了抑制 SGD 的震荡，SGDM 认为梯度下降过程加入了惯性，下坡的实收，如果发现是陡坡，那么惯性下降更快。</p>
-<script type="math/tex; mode=display">m_t = \beta_1m_{t-1} + (1-\beta_1)g_t</script><p>一阶动量是各个时刻梯度方向的指数移动平均值，约等于 <strong>$1/(1-\beta_1)$</strong> 个最近时刻的梯度方法的平均值。</p>
+<h4 id="2-SGDM-stochastic-gradident-descent-with-momentum"><a href="#2-SGDM-stochastic-gradident-descent-with-momentum" class="headerlink" title="2. SGDM (stochastic gradident descent with momentum)"></a>2. SGDM (stochastic gradident descent with momentum)</h4><p>为了抑制 SGD 的震荡，SGDM 认为梯度下降过程加入了惯性，下坡的实收，如果发现是陡坡，那么惯性下降更快。<br>$$m_t = \beta_1m_{t-1} + (1-\beta_1)g_t$$<br>一阶动量是各个时刻梯度方向的指数移动平均值，约等于 <strong>$1/(1-\beta_1)$</strong> 个最近时刻的梯度方法的平均值。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/07/%E4%BD%A0%E8%BF%98%E5%9C%A8%E7%94%A8SGD/#more" rel="contents">
@@ -1153,111 +1404,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.jpg">
-      <meta itemprop="name" content="zj_cheng">
-      <meta itemprop="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一棵大白菜">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/" class="post-title-link" itemprop="url">热爱生命</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-03-11 20:15:42 / 修改时间：21:00:37" itemprop="dateCreated datePublished" datetime="2021-03-11T20:15:42+08:00">2021-03-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/" class="post-meta-item leancloud_visitors" data-flag-title="热爱生命" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">评论数：</span>
-    
-    <a title="valine" href="/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center>
-<h1>热爱生命</h1>
-<p>
-我不去想，<br>
-是否能够成功 ，<br>
-既然选择了远方 ，<br>
-便只顾风雨兼程。<br>
-</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/11/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1324,7 +1475,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1337,7 +1488,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1418,7 +1569,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">19k</span>
+    <span title="站点总字数">27k</span>
 </div>
 
         

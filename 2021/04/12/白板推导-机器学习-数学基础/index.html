@@ -27,20 +27,21 @@
     var CONFIG = {"hostname":"zjcheng.site","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="重载与重写的区别     类型 重载 重写     方法名 一定不能修改 一定不能修改   参数列表 必须修改 一定不能修改   返回类型 可以修改 可以不同，但必须是父类返回值的派生类   访问权限 可以修改 一定不能做更加严格的显示(可以降低限制)   抛出异常 可以修改 可以减少或者删除，不能抛出新的或者更广的异常">
+  <meta name="description" content="1. 频率派 vs 贝叶斯派数据： $X &#x3D; (x_1, x_2, …, x_n)^T_{N \times p}$  参数:  $\theta$  频率派: $\theta$ 是未知参数，$X$ 是随机变量(r.v.) MLE: $\theta &#x3D; \argmax_{\theta} P(X | \theta)$ 引申为统计机器学习，构造loss function. 进行梯度下降法等参数优化训练">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java 基础 - 面向对象">
-<meta property="og:url" content="https://zjcheng.site/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:title" content="白板推导 - 机器学习 (数学基础)">
+<meta property="og:url" content="https://zjcheng.site/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="一棵大白菜">
-<meta property="og:description" content="重载与重写的区别     类型 重载 重写     方法名 一定不能修改 一定不能修改   参数列表 必须修改 一定不能修改   返回类型 可以修改 可以不同，但必须是父类返回值的派生类   访问权限 可以修改 一定不能做更加严格的显示(可以降低限制)   抛出异常 可以修改 可以减少或者删除，不能抛出新的或者更广的异常">
+<meta property="og:description" content="1. 频率派 vs 贝叶斯派数据： $X &#x3D; (x_1, x_2, …, x_n)^T_{N \times p}$  参数:  $\theta$  频率派: $\theta$ 是未知参数，$X$ 是随机变量(r.v.) MLE: $\theta &#x3D; \argmax_{\theta} P(X | \theta)$ 引申为统计机器学习，构造loss function. 进行梯度下降法等参数优化训练">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-23T07:57:46.000Z">
-<meta property="article:modified_time" content="2021-03-23T07:58:44.627Z">
+<meta property="article:published_time" content="2021-04-12T11:56:09.000Z">
+<meta property="article:modified_time" content="2021-04-27T13:45:22.114Z">
 <meta property="article:author" content="zj_cheng">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="视频笔记">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zjcheng.site/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+<link rel="canonical" href="https://zjcheng.site/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
@@ -53,7 +54,7 @@
   };
 </script>
 
-  <title>java 基础 - 面向对象 | 一棵大白菜</title>
+  <title>白板推导 - 机器学习 (数学基础) | 一棵大白菜</title>
   
 
 
@@ -211,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -224,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          java 基础 - 面向对象
+          白板推导 - 机器学习 (数学基础)
         </h1>
 
         <div class="post-meta">
@@ -233,22 +234,28 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-23 15:57:46 / 修改时间：15:58:44" itemprop="dateCreated datePublished" datetime="2021-03-23T15:57:46+08:00">2021-03-23</time>
+              <time title="创建时间：2021-04-12 19:56:09" itemprop="dateCreated datePublished" datetime="2021-04-12T19:56:09+08:00">2021-04-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-27 21:45:22" itemprop="dateModified" datetime="2021-04-27T21:45:22+08:00">2021-04-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
                 </span>
             </span>
 
           
-            <span id="/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-meta-item leancloud_visitors" data-flag-title="java 基础 - 面向对象" title="阅读次数">
+            <span id="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="白板推导 - 机器学习 (数学基础)" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -263,8 +270,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -279,141 +286,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="重载与重写的区别"><a href="# 重载与重写的区别" class="headerlink" title="重载与重写的区别"></a>重载与重写的区别</h3><hr>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>重载</th>
-<th>重写</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>方法名</td>
-<td>一定不能修改</td>
-<td>一定不能修改</td>
-</tr>
-<tr>
-<td>参数列表</td>
-<td>必须修改</td>
-<td>一定不能修改</td>
-</tr>
-<tr>
-<td>返回类型</td>
-<td>可以修改</td>
-<td>可以不同，但必须是父类返回值的派生类</td>
-</tr>
-<tr>
-<td>访问权限</td>
-<td>可以修改</td>
-<td>一定不能做更加严格的显示(可以降低限制)</td>
-</tr>
-<tr>
-<td>抛出异常</td>
-<td>可以修改</td>
-<td>可以减少或者删除，不能抛出新的或者更广的异常</td>
-</tr>
-</tbody>
-</table>
-</div>
-<span id="more"></span>
-<h3 id="抽象类和接口的区别"><a href="# 抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h3><hr>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>abstract class</th>
-<th>interface</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>继承</td>
-<td>只能 extends 一个类</td>
-<td>可以 implements 多个接口</td>
-</tr>
-<tr>
-<td>字段</td>
-<td>可以定义实例字段</td>
-<td>不能定义</td>
-</tr>
-<tr>
-<td>抽象方法</td>
-<td>可以定义抽象方法</td>
-<td>均为抽象方法</td>
-</tr>
-<tr>
-<td>非抽象方法</td>
-<td>可以包含抽象方法</td>
-<td>不能包含</td>
-</tr>
-</tbody>
-</table>
-</div>
+        <h4 id="1- 频率派 -vs- 贝叶斯派"><a href="#1- 频率派 -vs- 贝叶斯派" class="headerlink" title="1. 频率派 vs 贝叶斯派"></a>1. 频率派 vs 贝叶斯派 </h4><p> 数据： $X = (x_1, x_2, …, x_n)^T_{N \times p}$  参数:  $\theta$</p>
 <ul>
-<li>抽象类中可以包含抽象方法和成员变量，但是接口只能含有抽象方法</li>
-<li>它们都是本质上定义接口规范。保证所有子类都有相同的接口规范</li>
-<li>一个实体类只能继承一个抽象类，但是可以实现多个接口</li>
-<li>接口之间的继承使用 extends 关键词</li>
-<li>接口在定义变量时，默认修饰 <code>public static final</code>，可以省去不写</li>
-<li>接口在定义方法是，默认修饰 <code>public abstract</code>, 可以省去。</li>
-</ul>
-<h3 id="访问作用域 -private-protected-public"><a href="# 访问作用域 -private-protected-public" class="headerlink" title="访问作用域 (private, protected, public)"></a> 访问作用域(private, protected, public)</h3><hr>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>本类</th>
-<th>同一个包(子类和无关类)</th>
-<th>不同包下(子类)</th>
-<th>不同包下(无关类)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>private</td>
-<td>Y</td>
-<td>N</td>
-<td>N</td>
-<td>N</td>
-</tr>
-<tr>
-<td>default</td>
-<td>Y</td>
-<td>Y</td>
-<td>N</td>
-<td>N</td>
-</tr>
-<tr>
-<td>protected</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>N</td>
-</tr>
-<tr>
-<td>public</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>final<ul>
-<li>定义为 final 的类，不能被继承</li>
-<li>定义为 final 的方法，不能被子类重写</li>
-<li>定义为 final 的成员变量，可阻止其被重写赋值</li>
-<li>定义为 final 的局部变量，可阻止其被重写赋值</li>
-</ul>
+<li><p>频率派: $\theta$ 是未知参数，$X$ 是随机变量(r.v.)</p>
+<p>MLE: $\theta = \argmax_{\theta} P(X | \theta)$</p>
+<p>引申为统计机器学习，构造 loss function. 进行梯度下降法等参数优化训练</p>
+</li>
+<li><p>贝叶斯派：$\theta$ 为 r.v., 且具有先验分布 $\theta \sim P(\theta)$</p>
+<p>MAP: $\theta = \argmax_{\theta} P(\theta | X) = \argmax_{\theta} P(X|\theta)\cdot P(\theta)$</p>
+<p>贝叶斯估计：$P(\theta | X) = \frac{P(X | \theta)P(\theta)}{\int_{\theta}P(X|\theta)P(\theta) d\theta}$</p>
+<p>贝叶斯预测：给定观测 $\hat{x}$, $P(\hat{x}|X) = \int_{\theta}P(\hat{x},\theta|X) = \int_{\theta}P(\hat{x}|\theta)P(\theta|X) d\theta$</p>
+<p>引申为概率图模型，求积分， MCMC(蒙特卡洛采样)</p>
 </li>
 </ul>
+<span id="more"></span>
+
+<h4 id="2- 高斯分布 - 极大似然估计"><a href="#2- 高斯分布 - 极大似然估计" class="headerlink" title="2. 高斯分布 - 极大似然估计"></a>2. 高斯分布 - 极大似然估计 </h4><p> 数据：$X = (x_1, …, x_n)^T_{N \times p}， x_i \in {R^p}$ $x_i \sim N(\mu, \xi)$ 其样本之间独立同分布，$\theta = (\mu, \xi)$。</p>
+<p> 假设 $p = 1$, $\theta = (\mu, \delta^2)$</p>
+<p>一维高斯分布： $P(x|\theta) = \frac{exp(-\frac{(x-\mu)^2}{2\delta^2})}{\sqrt{2\pi}\delta}$</p>
+<p>p 维高斯分布：$P(x|\theta) = \frac{exp(-\frac{1}{2}(x-\mu)^T\xi^{-1}(x-\mu)}{(2\pi)^{\frac{p}{2}}|\xi|^{\frac{1}{2}}}$</p>
+<ul>
+<li><p>公式推导：<br>MLE: $$\theta = \argmax_\theta P(X | \theta)$$<br>$$logP(X|\theta) = log\prod P(x_i|\theta) = \sum_{i=1}^N log P(x_i|\theta) $$<br>$$ = \sum_{i=1}^N log \frac{1}{\sqrt{2\pi}\delta}exp(-\frac{(x_i-\mu)^2}{2\delta^2})$$<br>$$ = \sum_{i=1}^N log\frac{1}{\sqrt{2\pi}}+log\frac{1}{\delta}-\frac{(x_i-\mu)^2}{2\delta^2}$$</p>
+<p>极大似然估计求导，得到参数估计：<br>$${\mu}<em>{mle} = \argmax</em>{\mu} P(X|\theta)$$<br>$$= \argmax_{\mu} \sum_{i=1}^N - \frac{(x_i - \mu)^2}{2\delta^2}$$<br>$$= \argmin_{\mu} \sum_{i=1}^N {(x_i - \mu)^2}$$</p>
+<p>$$\frac{\partial\sum(x-\mu)^2}{\partial\mu}=0 \to \mu_{mle} = \frac{1}{N}\sum x_i$$</p>
+<p>$$\frac{\partial\sum(-log\delta-\frac{1}{2\delta^2}(x_i-\mu)^2)}{\partial\delta} = \sum_{i=1}^N[-\frac{1}{\delta}+(x_i-\mu)^2\delta^{-3}] = 0$$<br>$$\delta_{mle}^2 = \frac{1}{N}\sum_{i=1}^N(x_i - \mu_{mle})^2$$</p>
+</li>
+</ul>
+<h4 id="3- 高斯分布 - 极大似然估计（有偏 -vs- 无偏）"><a href="#3- 高斯分布 - 极大似然估计（有偏 -vs- 无偏）" class="headerlink" title="3. 高斯分布 - 极大似然估计（有偏 vs 无偏）"></a>3. 高斯分布 - 极大似然估计（有偏 vs 无偏）</h4><p>无偏的定义： 对于给定参数  $\theta$, 从实际数据得到的估计值 $\hat{\theta}$, 如何 $E(\hat{\theta}) = \theta$, 那么就是无偏的，否则有偏。</p>
+<ul>
+<li><p>$E(\mu_{mle}) = E[\frac{1}{N}\sum_{i=1}^N x_i] = \frac{1}{N}\sum_{i=1}^N E[x_i] = \mu$  无偏</p>
+</li>
+<li><p>$$E[\delta_{mle}^2] = E[\frac{1}{N}\sum_{i=1}^N(x_i-\mu_{mle})^2]$$<br>$$ = E[\frac{1}{N}\sum_{i=1}^N(x_i^2 - 2x_i\mu_{mle} + \mu_{mle}^2)]$$<br>$$ = E[\frac{1}{N}\sum_{i=1}^N (x_i^2 - \mu_{mle}^2)]$$<br>$$ = E[\frac{1}{N}\sum_{i=1}^N(x_i^2-\mu^2)] + E[\frac{1}{N}\sum_{i=1}^N(\mu_{mle}-\mu^2)]$$<br>$$ = E[\frac{1}{N}\sum_{i=1}^N\delta^2] - Var(\mu_{mle}) {即为 \frac{1}{N}\delta^2} = \frac{N-1}{N}\delta^2$$<br>所以 $\delta_{mle}^2$ 是有偏的。</p>
+</li>
+</ul>
+<h4 id="4- 高斯分布 - 从概率密度角度观察"><a href="#4- 高斯分布 - 从概率密度角度观察" class="headerlink" title="4. 高斯分布 - 从概率密度角度观察"></a>4. 高斯分布 - 从概率密度角度观察</h4><ul>
+<li><p>$X \sim N(\mu, \Sigma), P(x) = \frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma|^{\frac{1}{2}}} exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))$, $\Sigma$ 是正定的</p>
+</li>
+<li><p>$(x-\mu)^T\Sigma^{-1}(x-\mu)$： 表示马氏距离，其中当 $\Sigma = I$ 是，马氏距离即为欧氏距离。</p>
+</li>
+<li><p>$\Sigma = U\wedge U^T$ 其中 $UU^T=U^TU=I$, $\wedge = diag(\lambda_i)$, $U=(u_1,…,u_p)_{p\times p}$</p>
+</li>
+<li><p>$\Delta = (x-\mu)^T\Sigma^{-1}(x-\mu) = \sum_{i=1}^p\frac{y_i^2}{\lambda_i^2}$, 其中 $y_i = (x-\mu)^Tu_i$</p>
+</li>
+</ul>
+<h4 id="5- 高斯分布 - 局限性"><a href="#5- 高斯分布 - 局限性" class="headerlink" title="5. 高斯分布 - 局限性"></a>5. 高斯分布 - 局限性</h4><ul>
+<li><p>$\Sigma_{p\times p} \to \frac{p^2 - p}{2} \to 参数个数 O(p^2)$</p>
+</li>
+<li><p>参数个数，改进为假设 $Sigma = diag(\lambda_1, …, \lambda_p)$ 为对角矩阵</p>
+</li>
+<li><p>参数问题，假设模型为多个高斯模型的混合 GMM.</p>
+</li>
+</ul>
+<h4 id="6- 高斯分布 - 求边缘概率和条件概率"><a href="#6- 高斯分布 - 求边缘概率和条件概率" class="headerlink" title="6. 高斯分布 - 求边缘概率和条件概率"></a>6. 高斯分布 - 求边缘概率和条件概率 </h4><h4 id="7- 线性回归 - 最小二乘法及其几何意义"><a href="#7- 线性回归 - 最小二乘法及其几何意义" class="headerlink" title="7. 线性回归 - 最小二乘法及其几何意义"></a>7. 线性回归 - 最小二乘法及其几何意义</h4><p> 给定数据集合 $D = {(x_1, y_1), (x_2, y_2), …, (x_N, y_N))}$, $x_i \in R^P$, $y_i \in R$<br>$X = (x_1, x_2, …, x_N)^T, X \in R^{N \times p}$</p>
+<ul>
+<li>公式： $$L(w) = \sum_{i=1}^N ||w^T x_i - y_i||^2$$<pre><code>   $$=\sum_&#123;i=1&#125;^N (w^T x_i - y_i)^2$$
+   $$=(W^T X^T - Y^T)(XW - Y)$$
+   $$=W^TX^TXW - 2W^TX^TY + Y^TT$$
+   $$=W^TX^TXW - 2W^TX^TY$$
+</code></pre>
+$\hat{W} = \argmin{L(W)} \to \frac{\partial{L(W)}}{\partial{W}} = 2X^TXW - 2X^TY = 0$ 即 $W = (X^TX)^{-1}X^TY$</li>
+</ul>
+<h4 id="8- 线性回归 - 概率视角 -MLE- 高斯噪声"><a href="#8- 线性回归 - 概率视角 -MLE- 高斯噪声" class="headerlink" title="8. 线性回归 - 概率视角 -MLE- 高斯噪声"></a>8. 线性回归 - 概率视角 -MLE- 高斯噪声 </h4><p> 假设模型拟合存在噪声 $\varepsilon \sim N(0, \delta^2)$, 样本之间独立同分布。<br>$y = f(w) + \varepsilon = w^Tx + \varepsilon$</p>
+<p>则 $y|x,w \sim N(W^Tx, \delta^2)$<br>$$P(y|x; w) = \frac{1}{\sqrt{2\pi}\delta}exp(-\frac{(y-w^Tx)^2}{2\delta^2})$$</p>
+<ul>
+<li><p>MLE:<br>$$L(w) = logP(Y|X; w) = \sum_{i=1}^NlogP(y_i|x_i; w)$$<br>$$ = \sum_{i=1}^N log\frac{1}{\sqrt{2\pi}\delta} - \frac{1}{2\delta^2}(y_i-w^Tx_i)^2$$</p>
+<p>即 $$\hat{w} = \argmax_w L(w)$$<br>   $$= \argmax_w - \frac{1}{2\delta^2}(y_i-w^Tx_i)^2$$<br>   $$= \argmin_w (y_i-w^Tx_i)^2$$ </p>
+<p>即得到最小二乘的公式</p>
+</li>
+</ul>
+<h4 id="9- 线性回归 - 正则化 - 岭回归 - 频率角度"><a href="#9- 线性回归 - 正则化 - 岭回归 - 频率角度" class="headerlink" title="9. 线性回归 - 正则化 - 岭回归 - 频率角度"></a>9. 线性回归 - 正则化 - 岭回归 - 频率角度 </h4><p> 正则化框架:  $\argmin_w L(w) + \lambda P(w)$</p>
+<ul>
+<li><p>L1: Lasso,  $P(w) = ||w||_1$</p>
+</li>
+<li><p>L2: Ridge, 岭回归， $P(w) = ||w||_2^2 = w^Tw$。 权值衰减</p>
+</li>
+</ul>
+<p>加上 L2 正则的损失函数：<br>$$J(W) = \sum_{i=1}^N ||W^Tx_i - y_i||^2 + \lambda W^TW$$<br>$$ = (W^TX^T - Y^T)(XW - Y) + \lambda W^TW$$<br>$$ = W^T (X^TX + \lambda I) W - 2W^TX^TY + Y^TY$$<br>求导等于 0 $\hat{W} = \argmin J(W) \to \hat{W} = (X^TX+\lambda I)^{-1}X^TY$</p>
+<h4 id="10- 线性回归 - 正则化 - 岭回归 - 贝叶斯角度"><a href="#10- 线性回归 - 正则化 - 岭回归 - 贝叶斯角度" class="headerlink" title="10. 线性回归 - 正则化 - 岭回归 - 贝叶斯角度"></a>10. 线性回归 - 正则化 - 岭回归 - 贝叶斯角度</h4><ul>
+<li><p>LSE(最小二乘估计) = MLE (噪声为高斯分布的 极大似然估计)</p>
+</li>
+<li><p>Regulariezed LSE (加入正则化的最小二乘估计） = MAP （噪声和先验都是高斯分布的最大后验估计）</p>
+</li>
+</ul>
+<p>噪声为高斯分布的线性回归：<br>$$f(w) = w^Tx$$<br>$$y = f(w) + \varepsilon = w^Tx+\varepsilon$$<br>$$\varepsilon \sim N(0, \delta^2)$$<br>$$y|x;w \sim N(w^Tx, \delta^2)$$<br>$$P(y|x;w) = \frac{1}{\sqrt{2\pi}\delta}exp(-\frac{(y-w^Tx)^2}{2\delta^2})$$</p>
+<p>贝叶斯角度：假设先验参数也是服从高斯分布   $w \sim N(0, \delta_0^2)$<br>$$P(w|y) = \frac{P(y|w)P(w)}{P(y)}$$</p>
+<p>MAP: $$\hat{w} = \argmax_w P(w|y)$$<br>     $$= \argmax P(y|w)P(w)$$<br>     $$= \argmax \sum_{i=1}^N log[P(y|w)P(w)]$$<br>     $$= \argmax \sum_{i=1}^N log\frac{1}{\sqrt{2\pi}\delta \sqrt{2\pi}\delta_0^2} + log exp(-\frac{(y-w^Tx)^2}{2\delta^2} - \frac{||w||^2}{2\delta_0^2})$$<br>     $$= \argmin_w(\frac{(y-w^Tx)^2}{2\delta^2} + \frac{||w||^2}{2\delta_0^2})$$<br>     $$= \argmin_w((y-w^Tx)^2 + \frac{\delta^2}{\delta_0^2}||w||^2)$$<br>即为 带正则化的最小二乘估计。</p>
 
     </div>
 
@@ -444,7 +401,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+              <a href="/tags/%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 视频笔记</a>
           </div>
 
         
@@ -453,12 +411,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/23/java%E5%9F%BA%E7%A1%80-%E9%9B%86%E5%90%88/" rel="prev" title="Java 基础 - 集合">
-      <i class="fa fa-chevron-left"></i> Java 基础 - 集合
+    <a href="/2021/04/08/GBDT-Xgboost-%E5%92%8C-LightGBM/" rel="prev" title="GBDT, Xgboost 和 LightGBM">
+      <i class="fa fa-chevron-left"></i> GBDT, Xgboost 和 LightGBM
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/25/HMM/" rel="next" title="HMM">
-      HMM <i class="fa fa-chevron-right"></i>
+    <a href="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" rel="next" title="白板推导 - 机器学习 - 线性分类">
+      白板推导 - 机器学习 - 线性分类 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -519,7 +477,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">重载与重写的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">抽象类和接口的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%BD%9C%E7%94%A8%E5%9F%9F%20-private-protected-public"><span class="nav-text"> 访问作用域(private, protected, public)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%20%E9%A2%91%E7%8E%87%E6%B4%BE%20-vs-%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE"><span class="nav-text">1. 频率派 vs 贝叶斯派 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%20-%20%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1"><span class="nav-text">2. 高斯分布 - 极大似然估计 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%20-%20%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88%E6%9C%89%E5%81%8F%20-vs-%20%E6%97%A0%E5%81%8F%EF%BC%89"><span class="nav-text">3. 高斯分布 - 极大似然估计（有偏 vs 无偏）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%20-%20%E4%BB%8E%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E8%A7%92%E5%BA%A6%E8%A7%82%E5%AF%9F"><span class="nav-text">4. 高斯分布 - 从概率密度角度观察</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%20-%20%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">5. 高斯分布 - 局限性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%20-%20%E6%B1%82%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87%E5%92%8C%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-text">6. 高斯分布 - 求边缘概率和条件概率 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%20-%20%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E5%8F%8A%E5%85%B6%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="nav-text">7. 线性回归 - 最小二乘法及其几何意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%20-%20%E6%A6%82%E7%8E%87%E8%A7%86%E8%A7%92%20-MLE-%20%E9%AB%98%E6%96%AF%E5%99%AA%E5%A3%B0"><span class="nav-text">8. 线性回归 - 概率视角 -MLE- 高斯噪声 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%20-%20%E6%AD%A3%E5%88%99%E5%8C%96%20-%20%E5%B2%AD%E5%9B%9E%E5%BD%92%20-%20%E9%A2%91%E7%8E%87%E8%A7%92%E5%BA%A6"><span class="nav-text">9. 线性回归 - 正则化 - 岭回归 - 频率角度 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%20-%20%E6%AD%A3%E5%88%99%E5%8C%96%20-%20%E5%B2%AD%E5%9B%9E%E5%BD%92%20-%20%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%A7%92%E5%BA%A6"><span class="nav-text">10. 线性回归 - 正则化 - 岭回归 - 贝叶斯角度</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -812,6 +770,61 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
