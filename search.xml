@@ -1496,4 +1496,22 @@ $\hat{W} = \argmin{L(W)} \to \frac{\partial{L(W)}}{\partial{W}} = 2X^TXW - 2X^TY
         <tag>视频笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>白板推导 - 机器学习 - 指数族分布</title>
+    <url>/2021/05/02/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83/</url>
+    <content><![CDATA[<h4 id="指数族分布 - 背景"><a href="# 指数族分布 - 背景" class="headerlink" title="指数族分布 - 背景"></a> 指数族分布 - 背景 </h4><ul>
+<li><p> 定义: $P(x|\eta) = h(x) exp(\eta^T \phi(x) - A(\eta))$</p>
+<p>$\eta$: 参数向量， $x \in R^p$</p>
+<p>$A(\eta)$: log partition function （配分函数）</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>视频笔记</tag>
+      </tags>
+  </entry>
 </search>
