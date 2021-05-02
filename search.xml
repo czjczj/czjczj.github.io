@@ -1306,4 +1306,194 @@ $\hat{W} = \argmin{L(W)} \to \frac{\partial{L(W)}}{\partial{W}} = 2X^TXW - 2X^TY
         <tag>视频笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>白板推导 - 机器学习 (降维和 SVM)</title>
+    <url>/2021/04/27/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%99%8D%E7%BB%B4/</url>
+    <content><![CDATA[<h4 id="1- 降维 - 背景"><a href="#1- 降维 - 背景" class="headerlink" title="1. 降维 - 背景"></a>1. 降维 - 背景</h4><ul>
+<li><p>过拟合的解决方法：</p>
+<ul>
+<li>增加数据集</li>
+<li>正则化</li>
+<li>降维</li>
+</ul>
+</li>
+<li><p>维度灾难：每增加一个特征， 数据集往往需要以 2（或者 category 的 个数）的 指数级递增。</p>
+</li>
+</ul>
+<span id="more"></span>
+<h4 id="2- 降维 - 样本均值 -amp- 样本方差矩阵"><a href="#2- 降维 - 样本均值 -amp- 样本方差矩阵" class="headerlink" title="2. 降维 - 样本均值 &amp; 样本方差矩阵"></a>2. 降维 - 样本均值 &amp; 样本方差矩阵</h4><ul>
+<li><p>假设： </p>
+<p>Data: $X = (x_1, x_2, …, x_N)_{Nxp}^T, x_i \in R^p, i=1,…,N$</p>
+<p>Sample Mean: $\overline{X}<em>{p\times1} = \frac{1}{N}\sum</em>{i=1}^N x_i$</p>
+<p>SampleCovariance: $S_{pxp} = \frac{1}{N}\sum_{i=1}^N(x_i - \overline{x})(x_i - \overline{x})^T$</p>
+<p>单位矩阵： $1_N = (1; 1; …; 1)_{Nx1}$</p>
+</li>
+<li><p>改进则：<br>$$\overline{x} = \frac{1}{N}\sum_{i=1}^Nx_i = \frac{1}{N}(x_1,…,x_N)(1; …; 1) = \frac{1}{N}X^T1_N$$<br>$$S = \frac{1}{N}\sum_{i=1}^N (x_i-\overline{x})(x_i-\overline{x})^T$$<br>$$  = \frac{1}{N}(x_1-\overline{x}, x_2-\overline{x}, …, x_N-\overline{x}) ((x_1-\overline{x})^T; (x_2-\overline{x})^T; …; (x_N - \overline{x})^T)$$</p>
+</li>
+</ul>
+<p>  $$(x_1-\overline{x}, x_2-\overline{x}, …, x_N-\overline{x}) = (x_1,x_2,…,x_N) - (\overline{x}, \overline{x}, …, \overline{x})$$<br>  $$= x^T - \overline{x}(1,1,…,1) = x^T - \overline{x}\cdot1_N^T = x^T - \frac{1}{N}x^T\cdot1_N\cdot 1_N^T$$</p>
+<p>  令 $H_N = I_N - \frac{1}{N}\cdot 1_N \cdot 1_N^T$<br>  $$\to S = \frac{1}{N}x^T H_N H_N^T X = \frac{1}{N}x^TH_Nx$$</p>
+<h4 id="3- 降维 -PCA- 最大投影方差"><a href="#3- 降维 -PCA- 最大投影方差" class="headerlink" title="3. 降维 -PCA- 最大投影方差"></a>3. 降维 -PCA- 最大投影方差</h4><ul>
+<li><p>一个中心： 对于原始特征空间的重构（从相关 到 不相关）</p>
+</li>
+<li><p>两个基本点： ①： 最大投影方差 ②： 最小重构误差</p>
+</li>
+<li><p>投影方差：寻找到一个方向 $u_1$ 使得样本在该方向的方差更大<br>$$J = \frac{1}{N}\sum_{i=1}^N ((x_i - \overline{x})^T u_1)^2$$<br>$$ = u_1^T \frac{1}{N}\sum_{i=1}^N(x_i - \overline{x})(x_i - \overline{x})^T u_1$$<br>$$ = u_1^T\cdot S \cdot u_1$$</p>
+</li>
+<li><p>优化函数</p>
+<p>①：$\hat{u_1} = \argmax u_1^T \cdot S \cdot u_1$</p>
+<p>②：$u_1^T\cdot u_1 = 1$<br>$$L(u_1, \lambda) = u_1^T\cdot S \cdot u_1  + \lambda(1 - u_1^T \cdot u_1)$$<br>$$\frac{\partial L}{\partial u_1} = 2\cdot S \cdot u_1 - 2\cdot \lambda \cdot u_1 = 0$$<br>$$\to S\cdot u_1 = \lambda\cdot u_1$$<br>即协方差矩阵的 <strong>特征值 </strong> 和 <strong> 特征向量</strong> 即为最终需要求解的内容</p>
+</li>
+</ul>
+<h4 id="4- 降维 -PCA- 最小重构误差"><a href="#4- 降维 -PCA- 最小重构误差" class="headerlink" title="4. 降维 -PCA- 最小重构误差"></a>4. 降维 -PCA- 最小重构误差</h4><p>$x_i = \sum_{k=1}^p (x_i^T u_k) u_k$</p>
+<p>$\hat{x_i} = \sum{k=1}^q(x_i^T u_k) u_k$</p>
+<ul>
+<li>重构损失: $u_i, u_j$ 是相互正交的 <br>$$J = \frac{1}{N}\sum_{i=1}^N ||x_i - \hat{x_i}||^2$$<br>$$ = \frac{1}{N}\sum_{i=1}^N ||\sum_{k=q+1}^p (x_i^T u_k) u_k||^2$$<br>$$ = \frac{1}{N}\sum_{k=q+1}^p (x_i^T u_k)^2$$<br>$$ = \frac{1}{N}\sum_{i=1}^N\sum_{k=q+1}^p((x_i - \overline{x})^T u_k)^2$$<br>$$ = \sum_{k=q+1}^p\sum_{i=1}^N \frac{1}{N}((x_i - \overline{x})^T u_k)^2$$<br>$$ = \sum_{k=q+1}^p u_k^T \cdot S \cdot u_k$$<br> 即:<br>  $$u_k = \argmin \sum_{k=q+1}^p u_k^T \cdot S \cdot u_k$$<br>  $$u_k^T \cdot u_k = 1$$ </li>
+</ul>
+<h4 id="5- 降维 -SVD- 角度看 PCA- 和 -PCoA"><a href="#5- 降维 -SVD- 角度看 PCA- 和 -PCoA" class="headerlink" title="5. 降维 -SVD 角度看 PCA 和 PCoA"></a>5. 降维 -SVD 角度看 PCA 和 PCoA</h4><ul>
+<li><p>协方差矩阵的奇异值分解：<br>$$S = GKG^T$$<br>$$G^TG = I$$<br>$$k = diag(k_1, k_2, …, k_p), k_1\ge k_2\ge k_3 … \ge k_p$$</p>
+</li>
+<li><p>SVD 的分解：<br>$$U^TU = I$$<br>$$V^TV = VV^T = I$$<br>$$\Sigma 对角矩阵 $$<br>$$HX = U\Sigma V^T$$</p>
+</li>
+<li><p>推导：<br>$$S_{pxp} = X^THX = X^TH^THX = V\Sigma U^T\cdot U\Sigma V^T = V\Sigma^2V^T$$<br>$$T_{NxN} = HXX^TH = U\Sigma V^T \cdot V\Sigma U^T = U\Sigma^2 U^T$$</p>
+<p>由此 T 和 S 有相同的 eigen value</p>
+<p>S: 特征分解： 得到方向（主成分）</p>
+<p>T: 特征分解： 直接得到坐标 （PCoA[principle coordinate analysis]， 主坐标分析）</p>
+</li>
+</ul>
+<h4 id="6- 降维 - 主成分分析 - 概率角度（重点要看）"><a href="#6- 降维 - 主成分分析 - 概率角度（重点要看）" class="headerlink" title="6. 降维 - 主成分分析 - 概率角度（重点要看）"></a>6. 降维 - 主成分分析 - 概率角度（重点要看）</h4><ul>
+<li><p>假设：</p>
+<p>oberved data: $x \in R^P$</p>
+<p>latent variabel: $z \in R^q, q &lt; p$</p>
+<p>$z \sim N(O_q, I_q)$</p>
+<p>$x = w\cdot z+ \mu + \varepsilon$ ：线性高斯模型</p>
+<p>$\varepsilon \in N(0, \delta I_p)$</p>
+</li>
+<li><p>求解：</p>
+<ul>
+<li><p>Inference: $P(z|x)$</p>
+</li>
+<li><p>Learning: $w, \mu, \delta^2 \to$ EM 算法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-SVM- 硬间隔 - 模型定义"><a href="#7-SVM- 硬间隔 - 模型定义" class="headerlink" title="7. SVM- 硬间隔 - 模型定义"></a>7. SVM- 硬间隔 - 模型定义</h4><ul>
+<li><p>svm 有三宝： 间隔、对偶、核技巧</p>
+</li>
+<li><p>svm: hard-margin svm; soft-margin svm; kernel svm</p>
+</li>
+<li><p>数据假设： ${(x_i, y_i)}_{i=1}^N, x_i\in R^p, y_i  \in {(-1, 1)}$ </p>
+</li>
+<li><p>原理： 最大间隔分类器， max margin(w, b), 且 $y_i(w^T x_i + b) &gt; 0$<br>$$\max_{w,b} \min_{x_i} \frac{1}{||w||}y_i(w^T x_i + b) = \max_{w,b}\frac{1}{||w||}\min_{x_i}y_i(w^Tx_i+b)$$<br>$$y_i(w^Tx_i+b)&gt;0; \exist r&gt;0, \min_{x_i}y_i(w^Tx_i+b) = r$$</p>
+<p>转化为凸优化问题(convex optimization):<br>$$\max_{w,b} \frac{1}{||w||} \to \min_{w,b}\frac{1}{2}w^Tw$$<br>$$\min y_i(w^Tx_i+b)=1 \to y_i(w^Tx_i+b) \ge 1$$</p>
+</li>
+</ul>
+<h4 id="8-SVM- 硬间隔 - 模型求解（对偶问题）"><a href="#8-SVM- 硬间隔 - 模型求解（对偶问题）" class="headerlink" title="8. SVM- 硬间隔 - 模型求解（对偶问题）"></a>8. SVM- 硬间隔 - 模型求解（对偶问题）</h4><ul>
+<li><p>拉格朗日函数：$L(w, b, \lambda) = \frac{1}{2}w^Tw+\sum_{i=1}^N \lambda_i(1-y_i(w^Tx+b))$</p>
+</li>
+<li><p>从有约束变成无约束：</p>
+<ul>
+<li>$\min_{w,b} \max_{\lambda} L(w, b, \lambda)$</li>
+<li>$s.t. \lambda_i \ge 0$</li>
+</ul>
+</li>
+<li><p>对偶问题（dual problem)</p>
+<ul>
+<li>$\max_\lambda \min_{w, b} L(w, b, \lambda)$</li>
+<li>$\lambda_i \ge 0$</li>
+</ul>
+</li>
+<li><p>求偏导数得到结果：$\min_{w,b} L(w, b, \lambda)$<br>$$\frac{\partial L}{\partial b} = 0 \to \sum_{i=1}^N \lambda_i y_i = 0$$<br>$$L(w, b, \lambda) = \frac{1}{2}w^Tw + \sum_{i=1}^N \lambda_i - \sum_{i=1}^N \lambda_i y_i (w^T x_i + b)$$<br>$$ = \frac{1}{2}w^Tw + \sum_{i=1}^N \lambda_i - \sum_{i=1}^N \lambda_i y_i w^T x_i + \sum_{i=1}^N \lambda_i y_i b$$<br>$$= \frac{1}{2}w^Tw + \sum_{i=1}^N \lambda_i - \sum_{i=1}^N \lambda_i y_i w^T x_i$$</p>
+<p>$$\frac{\partial L}{\partial w} = \frac{1}{2}\cdot 2w - \sum_{i=1}^N \lambda_i y_i x_i = 0 \to w^* = \sum_{i=1}^N \lambda_i y_i x_i$$</p>
+<p>$$\min L(w, b, \lambda) = -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\lambda_i \lambda_j y_i y_j x_i^T x_j + \sum_{i=1}^N \lambda_i$$</p>
+</li>
+<li><p>最终的求解为：</p>
+<ul>
+<li>$\max_\lambda -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\lambda_i \lambda_j y_i y_j x_i^T x_j + \sum_{i=1}^N \lambda_i$</li>
+<li>$\lambda_i \ge 0$</li>
+<li>$\sum_{i=1}^N \lambda_i y_i = 0$</li>
+</ul>
+</li>
+</ul>
+<h4 id="9-SVM- 硬间隔 - 模型求解 -KKT 条件"><a href="#9-SVM- 硬间隔 - 模型求解 -KKT 条件" class="headerlink" title="9. SVM- 硬间隔 - 模型求解 -KKT 条件"></a>9. SVM- 硬间隔 - 模型求解 -KKT 条件</h4><ul>
+<li><p>KKT: 原问题和对偶问题之间具有强对偶关系的充要条件</p>
+</li>
+<li><p>KKT 条件：</p>
+<ul>
+<li>$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial b} = \frac{\partial L}{\partial \lambda} = 0$</li>
+<li>互补充斥：$\lambda_i(1-y_i(w^Tx_i+b) = 0$</li>
+<li>对偶问题可行：$\lambda_i \ge 0$</li>
+<li>原问题可行： $1-y_i(w^Tx_i+b) \le 0$</li>
+</ul>
+</li>
+<li><p>求解结果：</p>
+<ul>
+<li>$w^* = \sum_{i=1}^N \lambda_i y_i x_i$： 只和决策向量的那些样本有关。</li>
+<li>$b^* = y_k - \sum_{i=1}^N \lambda_i y_i x_i^T x_k$</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-SVM- 软间隔 - 模型定义"><a href="#10-SVM- 软间隔 - 模型定义" class="headerlink" title="10. SVM- 软间隔 - 模型定义"></a>10. SVM- 软间隔 - 模型定义</h4><ul>
+<li><p>soft: 允许有一点点错误： $\min\frac{1}{2}w^Tw + loss$</p>
+<ul>
+<li><p>① loss = $\sum_{i=1}^N I{y_i(w^Tx_i + b) &lt; 1}$ , 即错误的点的个数, 缺点是关于 w 不连续。</p>
+</li>
+<li><p>② loss 为距离</p>
+</li>
+<li><p>如果： $y_i(w^Tx_i+b) \ge 1$, loss = 0</p>
+</li>
+<li><p>如果： $y_i(w^Tx_i+b) &lt; 1$, loss = $1-y_i(w^Tx_i+b)$</p>
+</li>
+<li><p>即： loss = $\max{0, 1-y_i(w^Tx_i+b)}$</p>
+</li>
+</ul>
+</li>
+<li><p>软间隔：假设 $\xi_i = 1 - y_i(w^Tx_i+b), \xi_i \ge 0$<br>$$\min_{w,b} \frac{1}{2}w^Tw + C\sum_{i=1}^N \xi_i$$<br>$$y_i(w^Tx_i+b) \ge 1-\xi_i$$<br>$$\xi_i \ge 0$$</p>
+</li>
+</ul>
+<h4 id="11-SVM- 约束优化问题 - 若对偶性证明"><a href="#11-SVM- 约束优化问题 - 若对偶性证明" class="headerlink" title="11. SVM- 约束优化问题 - 若对偶性证明"></a>11. SVM- 约束优化问题 - 若对偶性证明</h4><ul>
+<li><p>需要证明的内容： 对偶问题 &lt;= 原问题； $\max_{\lambda, \eta} \min_x L(x, \lambda, \eta) &lt;= \min_x \max_{\lambda, \eta} L(x, \lambda, \eta), \lambda_i \ge 0$</p>
+</li>
+<li><p>若对偶性质证明:<br>$$\min_x L(x, \lambda, \eta) \le L(x, \lambda, \eta) \le \max_{\lambda, \eta}L(x, \lambda, \eta)$$<br>$$A(\lambda, \eta) \le C \le B(x)$$<br>$$\max A(\lambda, \eta) \le \min B(x)$$<br>证毕</p>
+</li>
+</ul>
+<h4 id="12-SVM- 约束优化问题 - 对偶关系之几何角度解释（需要理解）"><a href="#12-SVM- 约束优化问题 - 对偶关系之几何角度解释（需要理解）" class="headerlink" title="12. SVM- 约束优化问题 - 对偶关系之几何角度解释（需要理解）"></a>12. SVM- 约束优化问题 - 对偶关系之几何角度解释（需要理解）</h4><h4 id="13-SVM- 约束优化问题 - 对偶关系 -slater-condition"><a href="#13-SVM- 约束优化问题 - 对偶关系 -slater-condition" class="headerlink" title="13. SVM- 约束优化问题 - 对偶关系 -slater condition"></a>13. SVM- 约束优化问题 - 对偶关系 -slater condition</h4><ul>
+<li><p>凸优化 + slater condition <strong>是 </strong> 强对偶  的<strong> 充分条件</strong>。</p>
+</li>
+<li><p>定义： 存在一个点 x 在 <strong>定义域 </strong> 的 <strong> 相对内部</strong>。 对于所有的 i， 有 $m_i(x) &lt; 0$</p>
+<ul>
+<li>对于大多数凸优化， slater 成立</li>
+<li>松弛的 slater: M 中有 k 个放射函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="14-SVM- 约束优化问题 - 对偶关系 -KKT 条件"><a href="#14-SVM- 约束优化问题 - 对偶关系 -KKT 条件" class="headerlink" title="14. SVM- 约束优化问题 - 对偶关系 -KKT 条件"></a>14. SVM- 约束优化问题 - 对偶关系 -KKT 条件</h4><ul>
+<li><p>对偶问题（dual problem) ，原问题（primal problem), 强对偶关系（$d^*=p^*$). 强对偶关系是 KKT 条件的充分条件</p>
+</li>
+<li><p>KKT 条件 </p>
+<ul>
+<li>可行条件（$m_i(x^*)\le 0, n_j(x^*)=0, \lambda^* \ge 0$）</li>
+<li>互补松弛： $\lambda_i m_i = 0$</li>
+<li>梯度为 0： ${\frac{\partial L(x, \lambda^*, \eta^*)}{\partial x}|}_{x = x^*} = 0$</li>
+</ul>
+</li>
+</ul>
+<h4 id="15- 核方法 - 背景介绍"><a href="#15- 核方法 - 背景介绍" class="headerlink" title="15. 核方法 - 背景介绍"></a>15. 核方法 - 背景介绍</h4><ul>
+<li><p>非线性带来高维转化（从模型角度）</p>
+</li>
+<li><p>对偶表示带来内积（从优化角度）</p>
+</li>
+<li><p>Cover Theonem: 高维空间比低纬空间更容易线性可分</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>视频笔记</tag>
+      </tags>
+  </entry>
 </search>
