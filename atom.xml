@@ -6,7 +6,7 @@
   <link href="https://zjcheng.site/atom.xml" rel="self"/>
   
   <link href="https://zjcheng.site/"/>
-  <updated>2021-05-02T12:54:07.157Z</updated>
+  <updated>2021-05-04T06:37:11.332Z</updated>
   <id>https://zjcheng.site/</id>
   
   <author>
@@ -17,20 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>白板推导 - 机器学习 - 概率图模型</title>
+    <link href="https://zjcheng.site/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://zjcheng.site/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/</id>
+    <published>2021-05-04T06:36:37.000Z</published>
+    <updated>2021-05-04T06:37:11.332Z</updated>
+    
+    
+    
+    
+    <category term="机器学习" scheme="https://zjcheng.site/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="机器学习" scheme="https://zjcheng.site/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="视频笔记" scheme="https://zjcheng.site/tags/%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>白板推导 - 机器学习 - 指数族分布</title>
     <link href="https://zjcheng.site/2021/05/02/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83/"/>
     <id>https://zjcheng.site/2021/05/02/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83/</id>
     <published>2021-05-02T12:48:34.000Z</published>
-    <updated>2021-05-02T12:54:07.157Z</updated>
+    <updated>2021-05-04T06:35:42.189Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="指数族分布 - 背景"><a href="# 指数族分布 - 背景" class="headerlink" title="指数族分布 - 背景"></a> 指数族分布 - 背景 </h4><ul><li><p> 定义: $P(x|\eta) = h(x) exp(\eta^T \phi(x) - A(\eta))$</p><p>$\eta$: 参数向量， $x \in R^p$</p><p>$A(\eta)$: log partition function （配分函数）</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h4 id="1- 指数族分布 - 背景"><a href="#1- 指数族分布 - 背景" class="headerlink" title="1. 指数族分布 - 背景"></a>1. 指数族分布 - 背景</h4><ul><li><p>具有的性质：充分统计量； 共轭； 最大熵原理（无信息先验）</p></li><li><p>定义: $P(x|\eta) = h(x) exp(\eta^T \phi(x) - A(\eta))$</p><p>$\eta$: 参数向量， $x \in R^p$</p><p>$A(\eta)$: log partition function （对数配分函数）</p><p>$\phi(x)$: 充分统计量 （online learning)</p><span id="more"></span></li></ul><h4 id="2- 指数族分布 - 高斯分布的指数族形式"><a href="#2- 指数族分布 - 高斯分布的指数族形式" class="headerlink" title="2. 指数族分布 - 高斯分布的指数族形式"></a>2. 指数族分布 - 高斯分布的指数族形式</h4><ul><li><p>高斯分布： $P(x|\theta) = \frac{1}{\sqrt{2\pi}\delta} exp(-\frac{(x-\mu)^2}{2\delta^2})$<br>$$P(x|\theta) = \frac{1}{\sqrt{2\pi}\delta} exp(-\frac{(x-\mu)^2}{2\delta^2})$$</p></li><li><p>高斯分布的指数族形式：<br>$$exp{\eta^T \phi(x) -A(\eta)}$$<br>$$\eta = (\eta_1; \eta_2)$$<br>$$\phi(x) = (x; x^2)$$<br>$$A(\eta) = -\frac{\eta_1^2}{4\eta_2} + \frac{1}{2}log(-\frac{\pi}{\eta_2})$$<br>$$\eta = (\eta_1; \eta_2) = (\frac{\mu}{\delta^2}; -\frac{1}{2\delta^2})$$</p></li></ul><h4 id="3- 指数族分布 - 对数配分函数和充分统计量"><a href="#3- 指数族分布 - 对数配分函数和充分统计量" class="headerlink" title="3. 指数族分布 - 对数配分函数和充分统计量"></a>3. 指数族分布 - 对数配分函数和充分统计量 </h4><p> 对数分配函数与充分统计量之间存在某些关系</p><ul><li><p>一阶倒数：$A(\eta)^{‘} = \frac{\partial A(\eta)}{\partial \eta} = E_{p(x|\eta} [\phi(x)]$</p></li><li><p>二阶导数：$A(\eta)^{‘’} = Var[\phi(x)]$</p></li><li><p>$A(\eta) 是 凸函数 $</p></li></ul><h4 id="4- 指数族分布 - 极大似然估计和充分统计量"><a href="#4- 指数族分布 - 极大似然估计和充分统计量" class="headerlink" title="4. 指数族分布 - 极大似然估计和充分统计量"></a>4. 指数族分布 - 极大似然估计和充分统计量 </h4><p> 样本：$D = {x_1, …, x_N}$</p><p>极大似然估计：<br>  $$\eta_{mle} = \argmax logP(D|\eta)$$<br>  $$= \argmax log \prod_{i=1}^N P(x_i|\eta)$$<br>  $$= \argmax \sum_{i=1}^N log P(x_i|\eta)$$<br>  $$ = \argmax \sum_{i=1}^N log[h(x_i)\cdotexp(\eta^T\phi(x_i)-A(\eta))]$$<br>  $$ = \argmax \sum_{i=1}^N [logh(x_i) + \eta^T\phi(x_i) - A(\eta)]$$<br>  $$ = \argmax \sum_{i=1}^N (\eta^T\phi(x_i) - A(\eta))$$</p><p>求导：<br>  $$\frac{\partial}{\partial \eta}\sum_{i=1}^N (\eta^T\phi(x_i) - A(\eta))$$<br>  $$= \sum_{i=1}^N\frac{\partial}{\partial \eta}(\eta^T\phi(x_i) - A(\eta))$$<br>  $$= \sum_{i=1}^N \phi(x_i) - A(\eta)^{‘} = 0$$<br>  $$\to A(\eta_{mle})^{‘} = \frac{1}{N}\sum_{i=1}^N \phi(x_i)$$</p><p>求反函数： $\eta_{mle} = A(\eta)^{-1}$<br>即数据样本 $D$ 不需要保留，只需要得到充分统计量 $\phi(x)$</p><h4 id="5- 指数族分布 - 最大熵角度"><a href="#5- 指数族分布 - 最大熵角度" class="headerlink" title="5. 指数族分布 - 最大熵角度"></a>5. 指数族分布 - 最大熵角度</h4><ul><li><p>信息量： $-log P$， 即与该事件发生的概率呈反比</p></li><li><p>熵：$E_{p(x)}[- log P] = -\sum_x p(x) log p(x)$</p></li><li><p>最大熵： </p><p>$max H[P] = max -\sum_{i=1}^k p_i log p_i$</p><p>$\sum_{i=1}^k p_i = 1$</p><p>求解 $\hat{p_i} = \argmax H[p] = \argmin \sum_{i=1}^K p_i log p_i$</p><p>然后将其转化为 <strong>拉格朗日函数</strong> 并求导求解最终的函数值。最终可以得到结论在 p(x) 是均匀分布的情况下，能够使得熵最大。</p></li><li><p>在满足一定约束的情况下，需要满足最大熵的话，那么可以通过拉格朗日推导得到，$p(x)$ 是指数族分布。</p></li></ul>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h4 id=&quot;指数族分布 - 背景&quot;&gt;&lt;a href=&quot;# 指数族分布 - 背景&quot; class=&quot;headerlink&quot; title=&quot;指数族分布 - 背景&quot;&gt;&lt;/a&gt; 指数族分布 - 背景 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt; 定义: $P(x|\eta) = h(x) exp</summary>
-      
+    <summary type="html">&lt;h4 id=&quot;1-指数族分布-背景&quot;&gt;&lt;a href=&quot;#1-指数族分布-背景&quot; class=&quot;headerlink&quot; title=&quot;1. 指数族分布-背景&quot;&gt;&lt;/a&gt;1. 指数族分布-背景&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;具有的性质：充分统计量； 共轭； 最大熵原理（无信息先验）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;定义: $P(x|\eta) = h(x) exp(\eta^T \phi(x) - A(\eta))$&lt;/p&gt;
+&lt;p&gt;$\eta$: 参数向量， $x \in R^p$&lt;/p&gt;
+&lt;p&gt;$A(\eta)$: log partition function （对数配分函数）&lt;/p&gt;
+&lt;p&gt;$\phi(x)$: 充分统计量 （online learning)&lt;/p&gt;</summary>
     
     
     

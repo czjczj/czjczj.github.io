@@ -27,21 +27,21 @@
     var CONFIG = {"hostname":"zjcheng.site","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1. 线性分类-背景Linear Regression: $f(w, b) &#x3D; w^T x + b$  线性：  属性非线性： 特征转换（多项式回归） 全局非线性： 线性分类（激活函数是非线性） 系数非线性： 神经网络，感知机   全局性：线性样条回归，决策树  数据未加工： PCA,  流形   分类：  硬分类： 0 或者 1  线性判别模型 fisher: 感知机   软分类： 0 到 1">
+  <meta name="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="白板推导 - 机器学习 - 线性分类">
-<meta property="og:url" content="https://zjcheng.site/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/index.html">
+<meta property="og:title" content="白板推导 - 机器学习 - 概率图模型">
+<meta property="og:url" content="https://zjcheng.site/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="一棵大白菜">
-<meta property="og:description" content="1. 线性分类-背景Linear Regression: $f(w, b) &#x3D; w^T x + b$  线性：  属性非线性： 特征转换（多项式回归） 全局非线性： 线性分类（激活函数是非线性） 系数非线性： 神经网络，感知机   全局性：线性样条回归，决策树  数据未加工： PCA,  流形   分类：  硬分类： 0 或者 1  线性判别模型 fisher: 感知机   软分类： 0 到 1">
+<meta property="og:description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-20T01:51:41.000Z">
-<meta property="article:modified_time" content="2021-04-27T13:45:03.180Z">
+<meta property="article:published_time" content="2021-05-04T06:36:37.000Z">
+<meta property="article:modified_time" content="2021-05-04T06:37:11.332Z">
 <meta property="article:author" content="zj_cheng">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="视频笔记">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zjcheng.site/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">
+<link rel="canonical" href="https://zjcheng.site/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -54,7 +54,7 @@
   };
 </script>
 
-  <title>白板推导 - 机器学习 - 线性分类 | 一棵大白菜</title>
+  <title>白板推导 - 机器学习 - 概率图模型 | 一棵大白菜</title>
   
 
 
@@ -212,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -225,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          白板推导 - 机器学习 - 线性分类
+          白板推导 - 机器学习 - 概率图模型
         </h1>
 
         <div class="post-meta">
@@ -234,16 +234,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-04-20 09:51:41" itemprop="dateCreated datePublished" datetime="2021-04-20T09:51:41+08:00">2021-04-20</time>
+              <time title="创建时间：2021-05-04 14:36:37 / 修改时间：14:37:11" itemprop="dateCreated datePublished" datetime="2021-05-04T14:36:37+08:00">2021-05-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-27 21:45:03" itemprop="dateModified" datetime="2021-04-27T21:45:03+08:00">2021-04-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -255,7 +249,7 @@
             </span>
 
           
-            <span id="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" class="post-meta-item leancloud_visitors" data-flag-title="白板推导 - 机器学习 - 线性分类" title="阅读次数">
+            <span id="/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="白板推导 - 机器学习 - 概率图模型" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -270,8 +264,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/20/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -286,94 +280,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="1- 线性分类 - 背景"><a href="#1- 线性分类 - 背景" class="headerlink" title="1. 线性分类 - 背景"></a>1. 线性分类 - 背景</h4><p>Linear Regression: $f(w, b) = w^T x + b$</p>
-<ul>
-<li><p>线性：</p>
-<ul>
-<li>属性非线性： 特征转换（多项式回归）</li>
-<li>全局非线性： 线性分类（激活函数是非线性）</li>
-<li>系数非线性： 神经网络，感知机</li>
-</ul>
-</li>
-<li><p>全局性：线性样条回归，决策树</p>
-</li>
-<li><p>数据未加工： PCA,  流形</p>
-</li>
-</ul>
-<p>分类：</p>
-<ul>
-<li><p>硬分类： 0 或者 1</p>
-<ul>
-<li>线性判别模型 fisher:</li>
-<li>感知机</li>
-</ul>
-</li>
-<li><p>软分类： 0 到 1 的概率值</p>
-<ul>
-<li>生成式：高斯判别模型</li>
-<li>判别式：逻辑回归</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-<h4 id="2- 线性分类 - 感知机"><a href="#2- 线性分类 - 感知机" class="headerlink" title="2. 线性分类 - 感知机"></a>2. 线性分类 - 感知机 </h4><p> 思想： 错误驱动</p>
-<p>模型： $f(x) = sign(w^Tx), x\in R^p, w\in R^p$,<br>当 a&gt;=0, sign(a) = 1, 否则, sign(a) = -1</p>
-<p>策略：被错误分类的点的个数， loss function<br>$$L(w) = \sum_{i=1}^N I(y_iw^Tx_i &lt; 0) \to L(w) = \sum_{i=1}^N -y_iw^Tx_i$$ </p>
-<p>求解方法：SGD: $w^{t+1}=w^t - \lambda\frac{\partial L(w)}{\partial w} = w^t+\lambda y_ix_i$</p>
-<h4 id="3- 线性分类 - 线性判别分析（Fisher"><a href="#3- 线性分类 - 线性判别分析（Fisher" class="headerlink" title="3. 线性分类 - 线性判别分析（Fisher)"></a>3. 线性分类 - 线性判别分析（Fisher)</h4><ul>
-<li><p>假设符号表示： $X = (x_1, …, x_N)^T \in R^{N\times p}, x_i\in R^p, y_i\in(+1, -1)$,<br>  $X_{c_1} = {x_i | y_i = +1}, X_{c_2} = {x_i | y_i = -1}$, $|X_{c_1}|=N_1, X_{c_2}=N_2, N_1+N_2 = N$</p>
-</li>
-<li><p>思想： 类内小， 类间大。 </p>
-</li>
-<li><p>公式<br>$$z_i = w^T x_i$$<br>$$\hat{z} = \frac{1}{N}\sum_{i=1}^Nz_i = \frac{1}{N}w^Tx_i$$<br>$$S_z = \frac{1}{N}\sum_{i=1}^N (z_i - \hat{z})(z_i - \hat{z})^T$$<br>$$ = \frac{1}{N}\sum_{i=1}^N(w^Tx_i - \hat{z})(w^Tx_i - \hat{z})^T$$</p>
-<p>$$c_1: \hat{z_1} = \frac{1}{N_1}\sum_{i=1}^{N_1}w^Tx_i$$<br>$$S_1 = \frac{1}{N_1}\sum_{i=1}^{N_1}(w^Tx_i - \hat{z_1})(w^Tx_i - \hat{z_1})^T$$<br>$$c_2: \hat{z_2} = \frac{1}{N_2}\sum_{i=1}^{N_2}w^Tx_i$$<br>$$S_2 = \frac{1}{N_2}\sum_{i=1}^{N_2}(w^Tx_i - \hat{z_2})(w^Tx_i - \hat{z_2})^T$$</p>
-<p>类间：$(\hat{z_1} - \hat{z_2})^2$ </p>
-<p>类内：$S_1 + S_2$</p>
-<p>目标函数：<br>$$J(w) = \frac{(\hat{z_1} - \hat{z_2})^2}{S_1 + S_2} = \frac{w^T(\overline{x_{c_1}} - \overline{x_{c_2}})w}{w^T(S_{c_1} + S_{c_2})w}$$<br>$$ = \frac{w^T S_b w}{w^T S_w w}$$</p>
-<p>$S_b: between-class 类间方差 $</p>
-<p>$S_w: with-class 类内方差 $</p>
-<p>最终化简得到： $w \propto (\overline{x_{c_1}} - \overline{x_{c_2}})$</p>
-</li>
-</ul>
-<h4 id="4- 线性分析 - 逻辑回归"><a href="#4- 线性分析 - 逻辑回归" class="headerlink" title="4. 线性分析 - 逻辑回归"></a>4. 线性分析 - 逻辑回归</h4><ul>
-<li><p>Data: ${(x_i, y_i)}_{i-1}^N, x_i \in R^p, y_i\in{0, 1}$</p>
-</li>
-<li><p>sigmoid function: $\delta(z) = \frac{1}{1+exp(-z)}$<br>$$P(y=1|x) = \delta(w^Tx) = \frac{1}{1+exp(-w^T x)}, y=1$$<br>$$P(y=0|x) = 1 - P(y=1|x) = 1- \delta(w^Tx) = \frac{exp(-w^T x)}{1+exp(-w^T x)}, y=0$$<br>$$P(y|x) = P(y=1|x)^y P(y=0|x)^{1-y}$$</p>
-</li>
-<li><p>MLE 得到 交叉熵函数(cross entropy):<br>$$\hat{w} = \argmax_w \prod_{i=1}^N p(y_i|x_i)$$<br>$$= \argmax_w \sum_{i=1}^N y_ilog P(y=1|x)+(1-y_i)log P(y=0|x)$$<br>$$= \argmin_w  -\sum_{i=1}^N y_ilog P(y=1|x)+(1-y_i)log P(y=0|x)$$</p>
-</li>
-</ul>
-<h4 id="5- 线性分析 - 高斯判别分析"><a href="#5- 线性分析 - 高斯判别分析" class="headerlink" title="5. 线性分析 - 高斯判别分析"></a>5. 线性分析 - 高斯判别分析</h4><ul>
-<li><p>Data: ${(x_i, y_i)}_{i-1}^N, x_i \in R^p, y_i\in{0, 1}$</p>
-</li>
-<li><p>生成式模型：<br>$$\hat{y}= \argmax P(y|x) = \argmax_y P(y)P(x|y)$$<br>$$y \sim Bernoulli(\phi) \to {P(y=1)=\phi 且 P(y=0)=1-\phi }$$<br>$$x | y=1 \sim N(\mu_1, \xi)$$<br>$$x | y=0 \sim N(\mu_2, \xi)$$</p>
-</li>
-<li><p>log-likelihood:<br>$$l(\theta) = log\prod_{i=1}^N P(x_i, y_i)$$<br>$$ = \sum_{i=1}^Nlog (P(x_i|y_i)P(y_i))$$<br>$$ = \sum_{i=1}^N[log P(x_i|y_i) + log P(y_i)]$$<br>$$ = \sum_{i=1}^N[log N(\mu_1, \xi)^{y_i} N(\mu_2, \xi)^{1-y_i}+ log \phi^{y_i} (1-\phi)^{1-y_i}]$$<br>$$ = \sum_{i=1}^N[log N(\mu_1, \xi)^{y_i} + \log N(\mu_2, \xi)^{1-y_i}+ log \phi^{y_i} + log(1-\phi)^{1-y_i}]$$</p>
-</li>
-<li><p>假设：<br>$$\hat{\theta} = \argmax_{\theta} l(\theta)$$<br>$$\theta = (\mu_1, \mu_2, \xi, \phi)$$<br>$$y=1: N_1$$<br>$$y=0: N_2$$<br>$$N = N_1 + N_2$$</p>
-</li>
-<li><p>求偏导：<br>$$\frac{\partial l(\theta)}{\partial \phi} = \sum_{i=1}^N\frac{y_i}{\phi} + \frac{1-y_i}{1-\phi} = 0$$<br>$$\to \sum_{i=1}^N y_i(1-\phi) - (1-y_i)\phi = \sum_{i=1}^N (y_i - \phi) = 0$$<br>$$\to \sum_{i=1}^Ny_i - N\phi = 0$$<br>$$\to \hat{\phi} = \sum_{i=1}^N = \frac{N_1}{N}$$</p>
-</li>
-</ul>
-<p>  $$① = \sum_{i=1}^N logN(\mu_1,\xi)^{y_i} = \sum_{i=1}^Ny_i log \frac{1}{(2\pi)^\frac{p}{2}|\xi|^\frac{1}{2}}exp(-\frac{1}{2}(x_i - \mu_1)^T\xi^{-1}(x_i - \mu_1))$$<br>  $$\mu_1 = \argmax_{\mu_1}① = \argmax\sum_{i=1}^N y_i(-\frac{1}{2}(x_i - \mu_1)^T\xi^{-1}(x_i - \mu_1))$$<br>  $$\frac{\partial ①}{\partial \mu_1} = -\frac{1}{2}\sum_{i=1}^Ny_i(-2\xi^{-1}x_i + 2\xi^{-1}\mu_1) = 0$$<br>  $$\to \sum_{i=1}^N y_i(\mu_1 - x_i) = 0$$<br>  $$\to \hat{\mu_1} = \frac{\sum_{i=1}^Ny_ix_i}{\sum_{i=1}y_i} =\frac{\sum_{i=1}^Ny_ix_i}{N_1}$$</p>
-<ul>
-<li>同样的 MLE 求最大两个参数。</li>
-</ul>
-<h4 id="6- 线性分类 - 朴素贝叶斯分类器"><a href="#6- 线性分类 - 朴素贝叶斯分类器" class="headerlink" title="6. 线性分类 - 朴素贝叶斯分类器"></a>6. 线性分类 - 朴素贝叶斯分类器</h4><ul>
-<li><p>条件独立性假设: $P(x|y) = \prod_{i=1}^N P(x_i|y)$</p>
-</li>
-<li><p>目的（动机）： 简化运算。</p>
-</li>
-<li><p>$\hat{y} = \argmax_y P(y|x) = \argmax_y \frac{P(x, y)}{P(x)} = \argmax_y P(y) P(x|y)$</p>
-</li>
-<li><p>x 的分类</p>
-<ul>
-<li>x 是离散的, $x_j \sim Categorical Dist$</li>
-<li>x 是连续的, $x_j \sim N(\mu_j, \eth^2)$</li>
-</ul>
-</li>
-</ul>
-
+        
     </div>
 
     
@@ -413,13 +320,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/04/12/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" rel="prev" title="白板推导 - 机器学习 (数学基础)">
-      <i class="fa fa-chevron-left"></i> 白板推导 - 机器学习 (数学基础)
+    <a href="/2021/05/02/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83/" rel="prev" title="白板推导 - 机器学习 - 指数族分布">
+      <i class="fa fa-chevron-left"></i> 白板推导 - 机器学习 - 指数族分布
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/27/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%99%8D%E7%BB%B4/" rel="next" title="白板推导 - 机器学习 (降维和 SVM)">
-      白板推导 - 机器学习 (降维和 SVM) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -479,7 +383,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%20-%20%E8%83%8C%E6%99%AF"><span class="nav-text">1. 线性分类 - 背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%20-%20%E6%84%9F%E7%9F%A5%E6%9C%BA"><span class="nav-text">2. 线性分类 - 感知机 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%20-%20%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90%EF%BC%88Fisher"><span class="nav-text">3. 线性分类 - 线性判别分析（Fisher)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%20%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90%20-%20%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-text">4. 线性分析 - 逻辑回归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%20%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90%20-%20%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="nav-text">5. 线性分析 - 高斯判别分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%20-%20%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8"><span class="nav-text">6. 线性分类 - 朴素贝叶斯分类器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
