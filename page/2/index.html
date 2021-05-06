@@ -208,6 +208,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/03/25/CRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="zj_cheng">
+      <meta itemprop="description" content="目前状态：我在浪费时间，我在挥霍时光，我在模糊现在，我在恐惧未来。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵大白菜">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/25/CRF/" class="post-title-link" itemprop="url">CRF</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 14:55:35" itemprop="dateCreated datePublished" datetime="2021-03-25T14:55:35+08:00">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-30 10:23:13" itemprop="dateModified" datetime="2021-03-30T10:23:13+08:00">2021-03-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/25/CRF/" class="post-meta-item leancloud_visitors" data-flag-title="CRF" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2021/03/25/CRF/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/25/CRF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-马尔科夫随机场"><a href="#1-马尔科夫随机场" class="headerlink" title="1. 马尔科夫随机场"></a>1. 马尔科夫随机场</h4><ul>
+<li><p>场: 在空间的某个区域内, 如果除了个别点以外, 其他的该区域内的每个点p都有一个确定的量 $f(p)$, 那么<strong>该区域</strong>称为 $f(p)$ 的场。</p>
+</li>
+<li><p>随机过程: 设 $T$ 是一无限实数集, 把依赖于 $t \in T$ 的一族(无限多个)随机变量称为随机过程。即为</p>
+<script type="math/tex; mode=display">{X(t), t \in T}</script></li>
+<li><p>随机场: 如果 $T$ 是 $n$ 维度空间的一个子集, 即 $t$ 是一个 $n$ 维向量, 此时随机过程称为随机场。</p>
+</li>
+</ul>
+<h4 id="2-条件随机场CRF-conditional-random-field"><a href="#2-条件随机场CRF-conditional-random-field" class="headerlink" title="2. 条件随机场CRF (conditional random field)"></a>2. 条件随机场CRF (conditional random field)</h4><p>定义: 设 $X=(x_1, x_2, …, x_n)$ 和 $Y=(y_1, y_2, …, y_n)$ 均为线性表示的随机变量序列。若在<strong>给定</strong>随机变量序列<strong>x的条件下</strong>。 随机变量序列 $Y$ 的条件概率分布 $P(Y|X)$ 构成条件随机场, 并满足马尔科夫性:</p>
+<script type="math/tex; mode=display">P(Y_i|X, Y1,...,Y_{i-1},Y_{i+1},...,Y_n) = P(Y_i|X,Y_{i-1},Y_{i+1})</script><p>此时称 $P(Y|X)$ 为线性条件随机场。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/25/CRF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://zjcheng.site/2021/03/25/HMM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -717,7 +828,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -811,7 +922,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">34k</span>
+    <span title="站点总字数">37k</span>
 </div>
 
         

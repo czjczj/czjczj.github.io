@@ -1553,6 +1553,134 @@ $\hat{W} = \argmin{L(W)} \to \frac{\partial{L(W)}}{\partial{W}} = 2X^TXW - 2X^TY
   <entry>
     <title>白板推导 - 机器学习 - 概率图模型</title>
     <url>/2021/05/04/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h4 id="1- 概率图模型 - 背景介绍"><a href="#1- 概率图模型 - 背景介绍" class="headerlink" title="1. 概率图模型 - 背景介绍"></a>1. 概率图模型 - 背景介绍 </h4><ul>
+<li><p> 表示（Representation）</p>
+<ul>
+<li> 有向图（Bayesian Network）</li>
+<li> 无向图（Markov Network）</li>
+</ul>
+</li>
+<li><p> 推断（Inference)</p>
+<ul>
+<li> 精确推断 </li>
+<li> 近似推断 [确定性近似（变分推断）， 随机近似（MCMC）]</li>
+</ul>
+</li>
+<li><p> 学习（learning)</p>
+<ul>
+<li> 参数学习（完备数据，隐变量）</li>
+<li> 结构学习 </li>
+</ul>
+</li>
+<li><p> 规则：</p>
+<ul>
+<li>Sum Rule: $P(x_1) = \int P(x_1, x_2) dx_2$</li>
+<li>Product Rule: $P(x_1, x_2) = P(x_1)P(x_2|x_1) = P(x_2)P(x_1|x_2)$</li>
+<li>chain Rule: $P(x_1,…,x_p) = \prod_{i=1}^p P(x_i|x_1,…,x_{p-1})$</li>
+<li>bayesian Rule: $P(x_2|x_1) = \frac{P(x_2, x_1)}{P(x_1)} = \frac{P(x_1, x_2)}{\int P(x_1, x_2)dx_2} = \frac{P(x_2)P(x_2|x_1)}{\int P(x_2)P(x_1|x_2)dx_2}$</li>
+</ul>
+</li>
+<li><p> 高维随机变量 $P(x_1,…,x_p)$ 的困境： 维度高，计算复杂    </p>
+<ul>
+<li> 简化： 特征相互独立， $P(x_1,…,x_p)=\prod_{i=1}^p P(x_i)$<span id="more"></span></li>
+</ul>
+</li>
+</ul>
+<h4 id="2- 概率图模型 - 贝叶斯网络 - 条件独立性"><a href="#2- 概率图模型 - 贝叶斯网络 - 条件独立性" class="headerlink" title="2. 概率图模型 - 贝叶斯网络 - 条件独立性"></a>2. 概率图模型 - 贝叶斯网络 - 条件独立性 </h4><ul>
+<li><p> 原高纬随机变量计算：$P(x_1,…,x_p) = p(x_1)\prod_{i=2}^N p(x_i|x_1,…,x_{i-1})$</p>
+</li>
+<li><p> 条件独立性： $x_A\perp x_C | x_B$</p>
+</li>
+<li><p> 因子分解: $P(x_1, …, x_p) = \prod_{i=1}^pP(x_i|x_{parent}(i))$</p>
+</li>
+</ul>
+<h4 id="3- 概率图模型 - 贝叶斯网络 - 例子 - 具体模型 - 从单一到混合，- 从有限到无限 - 空间，时间"><a href="#3- 概率图模型 - 贝叶斯网络 - 例子 - 具体模型 - 从单一到混合，- 从有限到无限 - 空间，时间" class="headerlink" title="3. 概率图模型 - 贝叶斯网络 - 例子 - 具体模型 ( 从单一到混合， 从有限到无限 [ 空间，时间])"></a>3. 概率图模型 - 贝叶斯网络 - 例子 - 具体模型 (从单一到混合， 从有限到无限 [ 空间，时间])</h4><ul>
+<li><p> 单一：Naive Bayes : $P(x|y) = \prod_{i=1}^p P(x_i|y=1)$</p>
+</li>
+<li><p> 混合：GMM</p>
+</li>
+<li><p> 时间：</p>
+<ul>
+<li>Markov Chain</li>
+<li>Gaussian Process</li>
+</ul>
+</li>
+<li><p> 连续：Gaussian Bayesian Network</p>
+</li>
+</ul>
+<h4 id="4- 概率图模型 - 马尔科夫随机场 -Representation- 条件独立性和因子分解"><a href="#4- 概率图模型 - 马尔科夫随机场 -Representation- 条件独立性和因子分解" class="headerlink" title="4. 概率图模型 - 马尔科夫随机场 -Representation- 条件独立性和因子分解"></a>4. 概率图模型 - 马尔科夫随机场 -Representation- 条件独立性和因子分解 </h4><ul>
+<li><p> 条件独立性体现在三个方面：</p>
+<ul>
+<li><p> 全局马尔科夫性： $x_A \perp x_C | x_B$</p>
+</li>
+<li><p> 局部马尔科夫性：$a \perp {全集 -a-a 的邻居} | a 的邻居 $</p>
+</li>
+<li><p> 成对马尔科夫性：$x_i \perp x_j | x_{1…ij}$</p>
+</li>
+</ul>
+</li>
+<li><p> 因子分解：(Hammesley-Clifford 定理)</p>
+<ul>
+<li><p> 团， 最大团（节点的集合，集合中的节点两两有连接）</p>
+</li>
+<li><p>$P(x) = \frac{1}{Z}\prod_{i=1}^K \phi(X_{c_i}), Z 是归一化因子 $</p>
+</li>
+<li><p>$C_i: 最大团， X_{c_i}：最大团随机变量集合，\phi(X_{c_i})：势函数，必须为正 $</p>
+</li>
+<li><p>$Z = \sum_{x}\prod_{i=1}^K \phi(X_{c_i}) = \sum_{x_1}\sum_{x_2}\sum_{x_p}\prod_{i=1}^K \phi(X_{c_i})$</p>
+</li>
+<li><p>$\phi(X_{c_i}) = exp{-E(X_{c_i})} &gt; 0, P(x) 是 Gibbs Distribution$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5- 概率图模型 - 推断 Inference- 总体介绍"><a href="#5- 概率图模型 - 推断 Inference- 总体介绍" class="headerlink" title="5. 概率图模型 - 推断 Inference- 总体介绍"></a>5. 概率图模型 - 推断 Inference- 总体介绍 </h4><ul>
+<li><p> 求概率： P(x_1, x_2, …, x_p)</p>
+<ul>
+<li> 边缘概率： $P(x_i) = \sum_{x_1}…\sum_{x_{i-1}}\sum_{x_{i+1}}…\sum_{x_p} P(x)$</li>
+<li> 条件概率： $P(x_A | x_B), x = x_A 与 x_B 的交集 $</li>
+<li>MAP Inference: $\hat{z} = \argmax_z P(z|x) 正比于 \argmax P(z, x)$</li>
+</ul>
+</li>
+<li><p> 精确推断 </p>
+<ul>
+<li>variable elimination(VE)</li>
+<li>Belief Propagation(BP) -&gt; Sum-Product Algorithm(针对树结构)</li>
+<li>Junction Tree Algorithm (普通图结构)</li>
+</ul>
+</li>
+<li><p> 近似推断 </p>
+<ul>
+<li>Loop Belief Propagation (有环图)</li>
+<li>Mente Carlo Inference: Importance Sampling, MCMC</li>
+<li>Variational Inference</li>
+</ul>
+</li>
+</ul>
+<h4 id="6- 概率图模型 - 推断 Inference-Variable-Elimination"><a href="#6- 概率图模型 - 推断 Inference-Variable-Elimination" class="headerlink" title="6. 概率图模型 - 推断 Inference-Variable Elimination"></a>6. 概率图模型 - 推断 Inference-Variable Elimination</h4><p> 在一个 4 个节点的链式有向图中（a -&gt; b -&gt; c -&gt; d）, 假设 a, b, c, d 都是离散的二值，即 $a, b, c, d \in {0, 1}$<br> 则：<br>$$P(d) = \sum_{a,b,c} P(a, b, c, d)$$<br>$$= \sum_{a,b,c} P(a) P(b|a) P(c|b) P(d|c)$$<br>$$ = P(a=0) P(b=0|a=0) P(c=0|b=0) P(d=0|c=0)+…+P(a=1) P(b=1|a=1) P(c=1|b=1) P(d=1|c=1)$$<br>$$= \sum_{b,c} P(c|b) P(d|c) \sum_a P(a) P(b|a)$$<br>$$= \sum_c P(d|c) \sum_b P(c|b) \phi_a(b) = \phi_c(d)$$</p>
+<h4 id="7- 概率图模型 - 推断 Inference-Belief-Propagation"><a href="#7- 概率图模型 - 推断 Inference-Belief-Propagation" class="headerlink" title="7. 概率图模型 - 推断 Inference-Belief Propagation"></a>7. 概率图模型 - 推断 Inference-Belief Propagation</h4><p>BP 算法 = VE + Caching</p>
+<p>Belief Propagation： 不要直接求边缘概率 ($P(a), P(b), P(c), P(d)$), 只需要求 边上的概率 $m_{i\to j}$</p>
+<p> 结论：<br>  $$m_{j\to i}(x_i) = \sum_{x_j} \phi_{ij}\phi_j \prod_{k\in NB(j) - i} m_{k\to  j}(x_j)$$<br>  $$P(x_i) = \phi_i \prod_{k \in NB(i)} m_{k\to i} (x_i)$$</p>
+<h4 id="8- 概率图模型 - 概念补充 - 因子图（Factor-Graph"><a href="#8- 概率图模型 - 概念补充 - 因子图（Factor-Graph" class="headerlink" title="8. 概率图模型 - 概念补充 - 因子图（Factor Graph)"></a>8. 概率图模型 - 概念补充 - 因子图（Factor Graph)</h4><ul>
+<li><p> 有向图： $P(x) = \prod_x P(x_i|x_{pa(i)})$</p>
+</li>
+<li><p> 无向图： $P(x) = \frac{1}{Z}\prod_{i=1}^K \phi_{i} (X_{c_i}), c_i 为最大团集合 $</p>
+</li>
+<li><p> 道德图 (Moral Graph)： 有向图（树）$\to$ 无向图（引入环， Tree-like Graph）</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>视频笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>白板推导 - 机器学习 -EM 算法</title>
+    <url>/2021/05/06/%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-EM%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>机器学习</category>
